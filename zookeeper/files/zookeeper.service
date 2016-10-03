@@ -1,0 +1,14 @@
+[Unit]
+Description=Apache ZooKeeper
+After=network.target
+
+[Service]
+Type=forking
+User=zookeeper
+Environment=ZOOCFGDIR=/mnt/share/config/zookeeper/%H ZOO_LOG_DIR=/var/log/zookeeper
+CHDIR=/var/lib/zookeeper
+ExecStart=/opt/zookeeper/bin/zkServer.sh start
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

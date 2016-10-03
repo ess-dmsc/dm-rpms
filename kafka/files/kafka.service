@@ -1,0 +1,14 @@
+[Unit]
+Description=Apache Kafka
+After=network.target
+
+[Service]
+User=kafka
+Group=kafka
+Environment=LOG_DIR=/var/log/kafka
+CHDIR=/var/lib/kafka
+ExecStart=/opt/kafka/bin/kafka-server-start.sh /mnt/share/config/kafka/%H.properties
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
