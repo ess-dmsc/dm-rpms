@@ -6,7 +6,7 @@ After=network.target
 Type=forking
 User=zookeeper
 Environment=ZOOCFGDIR=/mnt/share/config/zookeeper/%H ZOO_LOG_DIR=/var/log/zookeeper
-CHDIR=/var/lib/zookeeper
+WorkingDirectory=/var/lib/zookeeper
 ExecStart=/opt/zookeeper/bin/zkServer.sh start
 Restart=on-abort
 
