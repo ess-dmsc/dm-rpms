@@ -28,11 +28,11 @@ echo "Extracting file..."
 tar xzf kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz
 
 echo "Creating package structure..."
-mkdir -p packaging/opt
-mkdir -p packaging/var/lib/kafka
+mkdir -p packaging/opt/dm_group
+mkdir -p packaging/var/opt/dm_group/kafka
 mkdir -p packaging/var/log/kafka
 mkdir -p packaging/etc/systemd/system
-mv kafka_$SCALA_VERSION-$KAFKA_VERSION packaging/opt/kafka
+mv kafka_$SCALA_VERSION-$KAFKA_VERSION packaging/opt/dm_group/kafka
 cp ../files/kafka.service packaging/etc/systemd/system
 cd packaging
 echo "Creating file..."
