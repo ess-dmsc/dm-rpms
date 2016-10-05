@@ -5,9 +5,9 @@ After=network.target
 [Service]
 Type=forking
 User=zookeeper
-Environment=ZOOCFGDIR=/mnt/share/config/zookeeper/%H ZOO_LOG_DIR=/var/log/zookeeper
-WorkingDirectory=/var/lib/zookeeper
-ExecStart=/opt/zookeeper/bin/zkServer.sh start
+Environment=ZOOCFGDIR=/etc/opt/dm_group/zookeeper ZOO_LOG_DIR=/var/log/zookeeper
+WorkingDirectory=/var/opt/dm_group/zookeeper
+ExecStart=/opt/dm_group/zookeeper/bin/zkServer.sh start
 Restart=on-abort
 
 [Install]

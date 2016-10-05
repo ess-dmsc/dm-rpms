@@ -27,11 +27,11 @@ echo "Extracting file..."
 tar xzf zookeeper-$ZOOKEEPER_VERSION.tar.gz
 
 echo "Creating package structure..."
-mkdir -p packaging/opt
-mkdir -p packaging/var/lib/zookeeper
+mkdir -p packaging/opt/dm_group
+mkdir -p packaging/var/opt/dm_group/zookeeper
 mkdir -p packaging/var/log/zookeeper
 mkdir -p packaging/etc/systemd/system
-mv zookeeper-$ZOOKEEPER_VERSION packaging/opt/zookeeper
+mv zookeeper-$ZOOKEEPER_VERSION packaging/opt/dm_group/zookeeper
 cp ../files/zookeeper.service packaging/etc/systemd/system
 cd packaging
 echo "Creating file..."
