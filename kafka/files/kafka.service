@@ -6,8 +6,8 @@ After=network.target
 User=kafka
 Group=kafka
 Environment=LOG_DIR=/var/log/kafka
-WorkingDirectory=/var/lib/kafka
-ExecStart=/opt/kafka/bin/kafka-server-start.sh /mnt/share/config/kafka/%H.properties
+WorkingDirectory=/var/opt/dm_group/kafka
+ExecStart=/opt/dm_group/kafka/bin/kafka-server-start.sh /etc/opt/dm_group/kafka/server.properties
 Restart=on-abort
 
 [Install]
