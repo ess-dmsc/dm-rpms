@@ -12,8 +12,8 @@ group.
 
 ## Instructions
 
-This section condenses the instructions for setting up the requirements on the
-DM development machine. Install required packages with
+To set up the requirements on the DM development machine, install required
+packages with
 
     $ sudo yum install mock ruby-devel
 
