@@ -52,6 +52,10 @@ fpm --input-type tar \
     --url "http://zookeeper.apache.org" \
     --rpm-user zookeeper \
     --rpm-group zookeeper \
-    --before-install ../../files/before-install.sh \
+    --before-install ../../files/add-user.sh \
+    --after-install ../../files/daemon-reload.sh \
+    --before-remove ../../files/stop-zookeeper.sh \
+    --before-upgrade ../../files/stop-zookeeper.sh \
+    --after-upgrade ../../files/daemon-reload.sh \
     zookeeper-$ZOOKEEPER_VERSION.tar.gz
 echo "RPM created and available in rpm folder."
