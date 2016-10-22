@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-RELEASE=1
+RELEASE=3
 KAFKA_VERSION=0.10.0.1
 SCALA_VERSION=2.11
 EXPECTED_MD5_SUM=702885a3f3efade1ee08435d29407474
@@ -53,6 +53,10 @@ fpm --input-type tar \
     --url "http://kafka.apache.org" \
     --rpm-user kafka \
     --rpm-group kafka \
-    --before-install ../../files/before-install.sh \
+    --before-install ../../files/add-user.sh \
+    --after-install ../../files/daemon-reload.sh \
+    --before-remove ../../files/stop-kafka.sh \
+    --before-upgrade ../../files/stop-kafka.sh \
+    --after-upgrade ../../files/daemon-reload.sh \
     kafka-$KAFKA_VERSION.tar.gz
 echo "RPM created and available in rpm folder."
