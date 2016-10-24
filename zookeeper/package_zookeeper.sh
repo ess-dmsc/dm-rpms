@@ -3,6 +3,7 @@
 # Configuration
 ZOOKEEPER_VERSION=3.4.9
 EXPECTED_MD5_SUM=3e8506075212c2d41030d874fcc9dcd2
+FPM_EXECUTABLE=/usr/local/bin/fpm
 
 # Read last release number, increase it and write to RELEASE
 RELEASE=$(cat RELEASE)
@@ -43,7 +44,7 @@ tar czf zookeeper-$ZOOKEEPER_VERSION.tar.gz etc opt var
 
 echo "Creating RPM..."
 mkdir -p ../../rpm
-fpm --input-type tar \
+$FPM_EXECUTABLE --input-type tar \
     --output-type rpm \
     --package ../../rpm \
     --name zookeeper \
