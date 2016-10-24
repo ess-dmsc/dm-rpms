@@ -1,7 +1,7 @@
 # Data Management RPM Creation Scripts
 
-Scripts to create RPMs from software packages used by the Data Management
-group.
+Scripts to create RPMs from external software packages used by the Data
+Management group.
 
 
 ## Requirements
@@ -28,8 +28,14 @@ substituting `<user>` with the user name. Install FPM with
 
 ## Creating an RPM
 
-Enter the corresponding folder and run the packaging script from there. To
-generate the Kafka RPM, for example, run
+A Makefile is provided for running the scripts to create the RPMs. The default
+target is `all`, which will generate all RPMs by running
 
-    $ cd kafka
-    $ ./package_kafka.sh
+    $ make
+
+To generate a specific RPM, run
+
+    $ make <package>
+
+where `<package>` must be substituted by the appropriate package name, e.g.
+*zookeeper* or *kafka*.
