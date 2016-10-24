@@ -1,9 +1,13 @@
 #!/bin/bash
 
 # Configuration
-RELEASE=1
 ZOOKEEPER_VERSION=3.4.9
 EXPECTED_MD5_SUM=3e8506075212c2d41030d874fcc9dcd2
+
+# Read last release number, increase it and write to RELEASE
+RELEASE=$(cat RELEASE)
+RELEASE=$((RELEASE+1))
+echo $RELEASE > RELEASE
 
 # Prepare environment
 mkdir -p zookeeper
