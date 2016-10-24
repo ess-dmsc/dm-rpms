@@ -3,14 +3,10 @@
 # Configuration
 ZOOKEEPER_VERSION=3.4.9
 EXPECTED_MD5_SUM=3e8506075212c2d41030d874fcc9dcd2
+RELEASE=$(cat RELEASE)
 if [ -z "$FPM_COMMAND" ] ; then
     FPM_COMMAND=fpm
 fi
-
-# Read last release number, increase it and write to RELEASE
-RELEASE=$(cat RELEASE)
-RELEASE=$((RELEASE+1))
-echo $RELEASE > RELEASE
 
 # Prepare environment
 mkdir -p zookeeper

@@ -4,14 +4,10 @@
 KAFKA_VERSION=0.10.0.1
 SCALA_VERSION=2.11
 EXPECTED_MD5_SUM=702885a3f3efade1ee08435d29407474
+RELEASE=$(cat RELEASE)
 if [ -z "$FPM_COMMAND" ] ; then
     FPM_COMMAND=fpm
 fi
-
-# Read last release number, increase it and write to RELEASE
-RELEASE=$(cat RELEASE)
-RELEASE=$((RELEASE+1))
-echo $RELEASE > RELEASE
 
 # Prepare environment
 mkdir -p kafka
