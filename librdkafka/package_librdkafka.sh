@@ -8,7 +8,7 @@ if [ ! -d librdkafka ] ; then
     git clone https://github.com/edenhill/librdkafka.git
 else
     cd librdkafka
-    git pull
+    git pull origin master
     cd ..
 fi
 cd librdkafka
