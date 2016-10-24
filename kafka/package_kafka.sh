@@ -4,7 +4,9 @@
 KAFKA_VERSION=0.10.0.1
 SCALA_VERSION=2.11
 EXPECTED_MD5_SUM=702885a3f3efade1ee08435d29407474
-FPM_EXECUTABLE=/usr/local/bin/fpm
+if [ -z "$FPM_COMMAND" ] ; then
+    FPM_COMMAND=fpm
+fi
 
 # Read last release number, increase it and write to RELEASE
 RELEASE=$(cat RELEASE)
@@ -45,7 +47,7 @@ tar czf kafka-$KAFKA_VERSION.tar.gz etc opt var
 
 echo "Creating RPM..."
 mkdir -p ../../rpm
-$FPM_EXECUTABLE --input-type tar \
+$FPM_COMMAND --input-type tar \
     --output-type rpm \
     --package ../../rpm \
     --name kafka \
