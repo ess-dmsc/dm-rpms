@@ -1,16 +1,13 @@
 #!/bin/bash
 
 # Configuration
-ZOOKEEPER_VERSION=3.4.9
-EXPECTED_MD5_SUM=3e8506075212c2d41030d874fcc9dcd2
-RELEASE=$(cat RELEASE)
 if [ -z "$FPM_COMMAND" ] ; then
     FPM_COMMAND=fpm
 fi
 
 # Prepare environment
 mkdir -p zookeeper
-rm -rf rpm/zookeeper-$ZOOKEEPER_VERSION-$RELEASE.* zookeeper/packaging zookeeper/zookeeper
+rm -rf rpm/zookeeper-$ZOOKEEPER_VERSION-$ZOOKEEPER_RELEASE.* zookeeper/packaging zookeeper/zookeeper
 cd zookeeper
 
 if [ ! -f "zookeeper-$ZOOKEEPER_VERSION.tar.gz" ] ; then
@@ -22,7 +19,7 @@ fi
 
 echo "Comparing MD5 sums..."
 MD5_SUM=$(openssl dgst -md5 zookeeper-$ZOOKEEPER_VERSION.tar.gz | awk '{print $2}')
-if [ "$MD5_SUM" != "$EXPECTED_MD5_SUM" ] ; then
+if [ "$MD5_SUM" != "$ZOOKEEPER_MD5_SUM" ] ; then
     echo "Error: MD5 sum different from expected value. Stopping."
     exit 1
 fi
@@ -47,7 +44,7 @@ $FPM_COMMAND --input-type tar \
     --package ../../rpm \
     --name zookeeper \
     --version $ZOOKEEPER_VERSION \
-    --iteration $RELEASE \
+    --iteration $ZOOKEEPER_RELEASE \
     --license "Apache License 2.0" \
     --provides "zookeeper" \
     --maintainer "Afonso" \
