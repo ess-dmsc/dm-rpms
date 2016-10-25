@@ -1,17 +1,14 @@
 #!/bin/bash
 
 # Configuration
-KAFKA_VERSION=0.10.0.1
 SCALA_VERSION=2.11
-EXPECTED_MD5_SUM=702885a3f3efade1ee08435d29407474
-RELEASE=$(cat RELEASE)
 if [ -z "$FPM_COMMAND" ] ; then
     FPM_COMMAND=fpm
 fi
 
 # Prepare environment
 mkdir -p kafka
-rm -rf rpm/kafka-$KAFKA_VERSION-$RELEASE.* kafka/packaging kafka/kafka
+rm -rf rpm/kafka-$KAFKA_VERSION-$KAFKA_RELEASE.* kafka/packaging kafka/kafka
 cd kafka
 
 if [ ! -f "kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz" ] ; then
@@ -23,7 +20,7 @@ fi
 
 echo "Comparing MD5 sums..."
 MD5_SUM=$(openssl dgst -md5 kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz | awk '{print $2}')
-if [ "$MD5_SUM" != "$EXPECTED_MD5_SUM" ] ; then
+if [ "$MD5_SUM" != "$KAFKA_MD5_SUM" ] ; then
     echo "Error: MD5 sum different from expected value. Stopping."
     exit 1
 fi
@@ -48,7 +45,7 @@ $FPM_COMMAND --input-type tar \
     --package ../../rpm \
     --name kafka \
     --version $KAFKA_VERSION \
-    --iteration $RELEASE \
+    --iteration $KAFKA_RELEASE \
     --license "Apache License 2.0" \
     --provides "kafka" \
     --maintainer "Afonso" \
