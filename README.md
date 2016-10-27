@@ -15,7 +15,7 @@ Management group.
 To set up the requirements on the DM development machine, install required
 packages with
 
-    $ sudo yum install mock ruby-devel
+    $ sudo yum install rpm-build mock ruby-devel
 
 Add the user who will run the scripts to the *mock* group by running
 
