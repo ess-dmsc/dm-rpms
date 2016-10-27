@@ -6,6 +6,7 @@ Management group.
 
 ## Requirements
 
+- rpm-build
 - FPM (https://github.com/jordansissel/fpm)
 - mock (see Notes below)
 
