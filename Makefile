@@ -21,7 +21,7 @@ rpms/kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).x86_64.rpm: kafka/CONFIG kafka/pack
 
 librdkafka: rpms/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm
 
-rpms/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm: libkafka/CONFIG libkafka/package_libkafka.sh | rpms
+rpms/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm: librdkafka/CONFIG librdkafka/package_librdkafka.sh | rpms
 	cd librdkafka; ./package_librdkafka.sh
 	mv librdkafka/rpm/*.rpm rpms
 
