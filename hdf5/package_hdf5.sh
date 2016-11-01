@@ -38,7 +38,7 @@ make
 make install DESTDIR=$(pwd)/../packaging
 cd ../packaging
 echo "Creating files..."
-tar czf hdf5-$HDF5_VERSION.tar.gz usr/bin usr/lib
+tar czf hdf5-$HDF5_VERSION.tar.gz usr/bin usr/lib64
 tar czf hdf5-devel-$HDF5_VERSION.tar.gz usr/include usr/share
 
 echo "Creating RPMs..."
