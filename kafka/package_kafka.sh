@@ -8,7 +8,7 @@ fi
 
 # Prepare environment
 mkdir -p kafka
-rm -rf rpm/kafka-$KAFKA_VERSION-$KAFKA_RELEASE.* kafka/packaging kafka/kafka
+rm -rf rpm/kafka-$KAFKA_VERSION-$KAFKA_RELEASE.* kafka/packaging kafka/kafka rpm
 cd kafka
 
 if [ ! -f "kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz" ] ; then

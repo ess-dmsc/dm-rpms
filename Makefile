@@ -1,8 +1,15 @@
 include */CONFIG
 
-.PHONY: all kafka librdkafka zookeeper clean
+.PHONY: all hdf5 kafka librdkafka zookeeper clean
 
-all: kafka librdkafka zookeeper
+all: hdf5 kafka librdkafka zookeeper
+
+
+hdf5: rpms/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm
+
+rpms/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm: | rpms
+	cd hdf5; ./package_hdf5.sh
+	mv hdf5/rpm/*.rpm rpms
 
 
 kafka: rpms/kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).x86_64.rpm
@@ -28,3 +35,7 @@ rpms/zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).x86_64.rpm: | rpms
 
 rpms:
 	mkdir -p rpms
+
+
+clean:
+	rm -rf rpms

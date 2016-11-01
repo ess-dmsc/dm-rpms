@@ -7,7 +7,7 @@ fi
 
 # Prepare environment
 mkdir -p zookeeper
-rm -rf rpm/zookeeper-$ZOOKEEPER_VERSION-$ZOOKEEPER_RELEASE.* zookeeper/packaging zookeeper/zookeeper
+rm -rf rpm/zookeeper-$ZOOKEEPER_VERSION-$ZOOKEEPER_RELEASE.* zookeeper/packaging zookeeper/zookeeper rpm
 cd zookeeper
 
 if [ ! -f "zookeeper-$ZOOKEEPER_VERSION.tar.gz" ] ; then
