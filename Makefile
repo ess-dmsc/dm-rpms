@@ -14,7 +14,7 @@ rpms/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm: hdf5/CONFIG hdf5/package_h
 
 kafka: rpms/kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).x86_64.rpm
 
-rpms/kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).x86_64.rpm: kafka/CONFIG kafka/package_kafka.sh | rpms
+rpms/kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).x86_64.rpm: kafka/CONFIG kafka/package_kafka.sh kafka/files/* | rpms
 	cd kafka; ./package_kafka.sh
 	mv kafka/rpm/*.rpm rpms
 
@@ -28,7 +28,7 @@ rpms/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.r
 
 zookeeper: rpms/zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).x86_64.rpm
 
-rpms/zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).x86_64.rpm: zookeeper/CONFIG zookeeper/package_zookeeper.sh | rpms
+rpms/zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).x86_64.rpm: zookeeper/CONFIG zookeeper/package_zookeeper.sh zookeeper/files/* | rpms
 	cd zookeeper; ./package_zookeeper.sh
 	mv zookeeper/rpm/*.rpm rpms/
 

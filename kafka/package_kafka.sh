@@ -34,6 +34,8 @@ mkdir -p packaging/var/log/kafka
 mkdir -p packaging/etc/systemd/system
 mv kafka_$SCALA_VERSION-$KAFKA_VERSION packaging/opt/dm_group/kafka
 cp ../files/kafka.service packaging/etc/systemd/system
+cp ../files/start-kafka-service.sh packaging/opt/dm_group/kafka/
+chmod u+x packaging/opt/dm_group/kafka/start-kafka-service.sh
 cd packaging
 echo "Creating file..."
 tar czf kafka-$KAFKA_VERSION.tar.gz etc opt var

@@ -33,6 +33,9 @@ mkdir -p packaging/var/log/zookeeper
 mkdir -p packaging/etc/systemd/system
 mv zookeeper-$ZOOKEEPER_VERSION packaging/opt/dm_group/zookeeper
 cp ../files/zookeeper.service packaging/etc/systemd/system
+mv packaging/opt/dm_group/zookeeper/conf/zoo_sample.cfg packaging/opt/dm_group/zookeeper/conf/zoo.cfg
+cp ../files/start-zookeeper-service.sh packaging/opt/dm_group/zookeeper/
+chmod u+x packaging/opt/dm_group/zookeeper/start-zookeeper-service.sh
 cd packaging
 echo "Creating file..."
 tar czf zookeeper-$ZOOKEEPER_VERSION.tar.gz etc opt var
