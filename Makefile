@@ -5,36 +5,37 @@ include */CONFIG
 all: hdf5 kafka librdkafka zookeeper
 
 
-hdf5: rpms/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm
+hdf5: rpms/x86_64/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm
+	createrepo rpms
 
-rpms/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm: hdf5/CONFIG hdf5/package_hdf5.sh | rpms
+rpms/x86_64/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm: hdf5/CONFIG hdf5/package_hdf5.sh | rpms/x86_64
 	cd hdf5; ./package_hdf5.sh
-	mv hdf5/rpm/*.rpm rpms
+	mv hdf5/rpm/*.rpm rpms/x86_64
 
 
-kafka: rpms/kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).x86_64.rpm
+kafka: rpms/x86_64/kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).x86_64.rpm
 
-rpms/kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).x86_64.rpm: kafka/CONFIG kafka/package_kafka.sh kafka/files/* | rpms
+rpms/x86_64/kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).x86_64.rpm: kafka/CONFIG kafka/package_kafka.sh kafka/files/* | rpms/x86_64
 	cd kafka; ./package_kafka.sh
-	mv kafka/rpm/*.rpm rpms
+	mv kafka/rpm/*.rpm rpms/x86_64
 
 
-librdkafka: rpms/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm
+librdkafka: rpms/x86_64/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm
 
-rpms/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm: librdkafka/CONFIG librdkafka/package_librdkafka.sh | rpms
+rpms/x86_64/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm: librdkafka/CONFIG librdkafka/package_librdkafka.sh | rpms/x86_64
 	cd librdkafka; ./package_librdkafka.sh
-	mv librdkafka/rpm/*.rpm rpms
+	mv librdkafka/rpm/*.rpm rpms/x86_64
 
 
-zookeeper: rpms/zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).x86_64.rpm
+zookeeper: rpms/x86_64/zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).x86_64.rpm
 
-rpms/zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).x86_64.rpm: zookeeper/CONFIG zookeeper/package_zookeeper.sh zookeeper/files/* | rpms
+rpms/x86_64/zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).x86_64.rpm: zookeeper/CONFIG zookeeper/package_zookeeper.sh zookeeper/files/* | rpms/x86_64
 	cd zookeeper; ./package_zookeeper.sh
-	mv zookeeper/rpm/*.rpm rpms/
+	mv zookeeper/rpm/*.rpm rpms/x86_64/
 
 
-rpms:
-	mkdir -p rpms
+rpms/x86_64:
+	mkdir -p rpms/x86_64
 
 
 clean:
