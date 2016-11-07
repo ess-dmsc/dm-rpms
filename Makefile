@@ -6,7 +6,6 @@ all: hdf5 kafka librdkafka zookeeper
 
 
 hdf5: rpms/x86_64/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm
-	createrepo rpms
 
 rpms/x86_64/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm: hdf5/CONFIG hdf5/package_hdf5.sh | rpms/x86_64
 	cd hdf5; ./package_hdf5.sh
