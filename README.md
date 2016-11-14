@@ -9,6 +9,7 @@ Management group.
 - rpm-build
 - FPM (https://github.com/jordansissel/fpm)
 - mock (see Notes below)
+- javac
 
 
 ## Instructions

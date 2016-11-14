@@ -1,8 +1,8 @@
 include */CONFIG
 
-.PHONY: all hdf5 kafka librdkafka zookeeper clean
+.PHONY: all hdf5 kafka librdkafka zookeeper kafka-manager clean
 
-all: hdf5 kafka librdkafka zookeeper
+all: hdf5 kafka librdkafka zookeeper kafka-manager
 
 
 hdf5: rpms/x86_64/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm
@@ -33,8 +33,18 @@ rpms/x86_64/zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).x86_64.rpm: zook
 	mv zookeeper/rpm/*.rpm rpms/x86_64/
 
 
+kafka-manager: rpms/noarch/kafka-manager-$(KAFKA_MANAGER_VERSION)-1.noarch.rpm
+
+rpms/noarch/kafka-manager-$(KAFKA_MANAGER_VERSION)-1.noarch.rpm: kafka-manager/CONFIG kafka-manager/package_kafka_manager.sh | rpms/noarch
+	cd kafka-manager; ./package_kafka_manager.sh
+	mv kafka-manager/rpm/*.rpm rpms/noarch
+
+
 rpms/x86_64:
 	mkdir -p rpms/x86_64
+
+rpms/noarch:
+	mkdir -p rpms/noarch
 
 
 clean:
