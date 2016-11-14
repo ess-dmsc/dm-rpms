@@ -8,4 +8,4 @@ else
     KAFKA_MANAGER_CONFIG=/opt/dm_group/kafka-manager/conf/application.conf
 fi
 
-/opt/dm_group/kafka-manager/bin/kafka-manager -Dconfig.file=$KAFKA_MANAGER_CONFIG
+/opt/dm_group/kafka-manager/bin/kafka-manager -Dconfig.file=$KAFKA_MANAGER_CONFIG -Dpidfile.path=/var/opt/dm_group/kafka-manager/kafka-manager.pid
