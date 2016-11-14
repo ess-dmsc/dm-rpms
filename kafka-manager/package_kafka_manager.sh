@@ -35,17 +35,17 @@ cd ..
 echo "Creating package structure..."
 mkdir -p packaging/opt/dm_group
 mkdir -p packaging/etc/systemd/system
+mkdir -p packaging/var/opt/dm_group/kafka-manager
 mv kafka-manager-$KAFKA_MANAGER_VERSION/target/universal/kafka-manager-$KAFKA_MANAGER_VERSION.zip packaging
 cd packaging
 unzip kafka-manager-$KAFKA_MANAGER_VERSION.zip
-
 mv kafka-manager-$KAFKA_MANAGER_VERSION opt/dm_group/kafka-manager
 cp ../../files/kafka-manager.service etc/systemd/system/
 cp ../../files/start-kafka-manager-service.sh opt/dm_group/kafka-manager/
 cp ../kafka-manager-$KAFKA_MANAGER_VERSION/LICENCE opt/dm_group/kafka-manager/
 chmod u+x opt/dm_group/kafka-manager/start-kafka-manager-service.sh
 echo "Creating file..."
-tar czf kafka-manager-$KAFKA_MANAGER_VERSION.tar.gz etc opt
+tar czf kafka-manager-$KAFKA_MANAGER_VERSION.tar.gz etc opt var
 
 echo "Creating RPM..."
 mkdir -p ../../rpm
