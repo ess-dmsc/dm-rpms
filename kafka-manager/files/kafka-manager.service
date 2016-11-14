@@ -1,0 +1,13 @@
+[Unit]
+Description=Kafka Manager
+After=network.target
+
+[Service]
+User=kafka-manager
+Group=kafka-manager
+WorkingDirectory=/var/opt/dm_group/kafka-manager
+ExecStart=/opt/dm_group/kafka-manager/start-kafka-manager-service.sh
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

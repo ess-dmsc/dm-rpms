@@ -33,18 +33,15 @@ rpms/x86_64/zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).x86_64.rpm: zook
 	mv zookeeper/rpm/*.rpm rpms/x86_64/
 
 
-kafka-manager: rpms/noarch/kafka-manager-$(KAFKA_MANAGER_VERSION)-1.noarch.rpm
+kafka-manager: rpms/x86_64/kafka-manager-$(KAFKA_MANAGER_VERSION)-$(KAFKA_MANAGER_RELEASE).x86_64.rpm
 
-rpms/noarch/kafka-manager-$(KAFKA_MANAGER_VERSION)-1.noarch.rpm: kafka-manager/CONFIG kafka-manager/package_kafka_manager.sh | rpms/noarch
+rpms/x86_64/kafka-manager-$(KAFKA_MANAGER_VERSION)-$(KAFKA_MANAGER_RELEASE).x86_64.rpm: kafka-manager/CONFIG kafka-manager/package_kafka_manager.sh | rpms/x86_64
 	cd kafka-manager; ./package_kafka_manager.sh
-	mv kafka-manager/rpm/*.rpm rpms/noarch
+	mv kafka-manager/rpm/*.rpm rpms/x86_64
 
 
 rpms/x86_64:
 	mkdir -p rpms/x86_64
-
-rpms/noarch:
-	mkdir -p rpms/noarch
 
 
 clean:
