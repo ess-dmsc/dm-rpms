@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CUSTOM_CONFIG_FILE=/etc/opt/dm_group/kafka-manager/conf/application.conf
+CUSTOM_CONFIG_FILE=/etc/opt/dm_group/kafka-manager/application.conf
 
 if [ -f "$CUSTOM_CONFIG_FILE" ] ; then
     KAFKA_MANAGER_CONFIG=$CUSTOM_CONFIG_FILE
