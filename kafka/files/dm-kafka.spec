@@ -24,9 +24,11 @@ install -d %{buildroot}/var/opt/dm_group/kafka
 cp -r kafka %{buildroot}/opt/dm_group/
 cp files/dm-kafka.service %{buildroot}/etc/systemd/system/
 
-%post
+%pre
 id -u kafka &>/dev/null || \
     useradd kafka --shell /usr/bin/false --no-create-home
+
+%post
 systemctl daemon-reload
 
 %preun
@@ -39,6 +41,7 @@ rm -rf %{buildroot}
 %defattr(-,kafka,kafka)
 /opt/dm_group/kafka/bin
 /opt/dm_group/kafka/libs
+/var/opt/dm_group/kafka
 %attr(755,kafka,kafka) /opt/dm_group/kafka/start-kafka-service.sh
 %attr(644,root,root) /etc/systemd/system/dm-kafka.service
 %config /opt/dm_group/kafka/config

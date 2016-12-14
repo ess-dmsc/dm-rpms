@@ -26,9 +26,11 @@ install -d %{buildroot}/var/opt/dm_group/zookeeper
 cp -r zookeeper %{buildroot}/opt/dm_group/
 cp files/dm-zookeeper.service %{buildroot}/etc/systemd/system/
 
-%post
+%pre
 id -u zookeeper &>/dev/null || \
     useradd zookeeper --shell /usr/bin/false --no-create-home
+
+%post
 systemctl daemon-reload
 
 %preun
@@ -42,6 +44,7 @@ rm -rf %{buildroot}
 /opt/dm_group/zookeeper/bin
 /opt/dm_group/zookeeper/lib
 /opt/dm_group/zookeeper/zookeeper-*.jar
+/var/opt/dm_group/zookeeper
 %attr(755,zookeeper,zookeeper) /opt/dm_group/zookeeper/start-zookeeper-service.sh
 %attr(644,root,root) /etc/systemd/system/dm-zookeeper.service
 %config /opt/dm_group/zookeeper/conf
