@@ -3,7 +3,6 @@ Version: %{_version}
 Release: %{_release}%{?dist}
 
 Summary: DM Group Apache Kafka package
-Group:   Development/Libraries/C and C++
 License: ASL 2.0
 URL:     http://kafka.apache.org
 Source:	 dm-kafka-%{version}.tar.gz
