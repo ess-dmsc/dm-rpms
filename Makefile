@@ -1,6 +1,6 @@
 include */CONFIG
 
-.PHONY: all hdf5 kafka librdkafka zookeeper kafka-manager clean
+.PHONY: all hdf5 kafka librdkafka zookeeper kafka-manager clean mostlyclean
 
 all: hdf5 kafka librdkafka zookeeper kafka-manager
 
@@ -47,5 +47,8 @@ rpms/noarch:
 	mkdir -p rpms/noarch
 
 
-clean:
+clean: mostlyclean
 	rm -rf rpms
+
+mostlyclean:
+	rm -rf {kafka,kafka-manager,zookeeper}/{package,sources,workspace}
