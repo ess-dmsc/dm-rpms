@@ -7,25 +7,17 @@ Management group.
 ## Requirements
 
 - rpm-build
-- FPM (https://github.com/jordansissel/fpm)
-- mock (see Notes below)
+- mock (see Instructions below)
 - javac
 
 
 ## Instructions
 
-To set up the requirements on the DM development machine, install required
-packages with
-
-    $ sudo yum install rpm-build mock ruby-devel
-
 Add the user who will run the scripts to the *mock* group by running
 
     $ sudo usermod -a -G mock <user>
 
-substituting `<user>` with the user name. Install FPM with
-
-    $ gem install fpm
+substituting `<user>` with the user name.
 
 
 ## Creating an RPM
