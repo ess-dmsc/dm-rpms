@@ -23,7 +23,9 @@ librdkafka: rpms/x86_64/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).
 
 rpms/x86_64/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm: librdkafka/CONFIG librdkafka/package_librdkafka.sh | rpms/x86_64
 	cd librdkafka; ./package_librdkafka.sh
-	mv librdkafka/rpm/*.rpm rpms/x86_64
+	mv librdkafka/sources/librdkafka/packaging/rpm/pkgs-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE)-default/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm rpms/x86_64/
+	mv librdkafka/sources/librdkafka/packaging/rpm/pkgs-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE)-default/librdkafka-devel-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm rpms/x86_64/
+	mv librdkafka/sources/librdkafka/packaging/rpm/pkgs-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE)-default/librdkafka-debuginfo-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm rpms/x86_64/
 
 
 zookeeper: rpms/noarch/dm-zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).el7.centos.noarch.rpm
@@ -52,3 +54,4 @@ clean: mostlyclean
 
 mostlyclean:
 	rm -rf {kafka,kafka-manager,zookeeper}/{package,sources,workspace}
+	rm -rf librdkafka/sources
