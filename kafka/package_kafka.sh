@@ -1,15 +1,11 @@
 #!/bin/bash
 
-# Configuration
-SCALA_VERSION=2.11
-if [ -z "$FPM_COMMAND" ] ; then
-    FPM_COMMAND=fpm
-fi
-
 # Prepare environment
-mkdir -p kafka
-rm -rf rpm/kafka-$KAFKA_VERSION-$KAFKA_RELEASE.* kafka/packaging kafka/kafka rpm
-cd kafka
+SCALA_VERSION=2.11
+rm -rf package/* workspace/*
+mkdir -p sources package/{BUILD,RPMS,SOURCES,SPECS,SRPMS} workspace
+
+cd sources
 
 if [ ! -f "kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz" ] ; then
     echo "File \"kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz\" not found. Downloading..."
@@ -24,41 +20,28 @@ if [ "$MD5_SUM" != "$KAFKA_MD5_SUM" ] ; then
     echo "Error: MD5 sum different from expected value. Stopping."
     exit 1
 fi
-echo "Extracting file..."
-tar xzf kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz
 
-echo "Creating package structure..."
-mkdir -p packaging/opt/dm_group
-mkdir -p packaging/var/opt/dm_group/kafka
-mkdir -p packaging/var/log/kafka
-mkdir -p packaging/etc/systemd/system
-mv kafka_$SCALA_VERSION-$KAFKA_VERSION packaging/opt/dm_group/kafka
-cp ../files/kafka.service packaging/etc/systemd/system
-cp ../files/start-kafka-service.sh packaging/opt/dm_group/kafka/
-chmod u+x packaging/opt/dm_group/kafka/start-kafka-service.sh
-cd packaging
-echo "Creating file..."
-tar czf kafka-$KAFKA_VERSION.tar.gz etc opt var
+cd ../workspace
+
+echo "Extracting file..."
+tar xzf ../sources/kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz
+
+echo "Creating package source..."
+mv kafka_$SCALA_VERSION-$KAFKA_VERSION kafka
+mkdir -p files
+cp ../files/start-kafka-service.sh kafka/
+cp ../files/dm-kafka.service files/
+mkdir dm-kafka-$KAFKA_VERSION
+mv kafka files dm-kafka-$KAFKA_VERSION/
+tar czf dm-kafka-$KAFKA_VERSION.tar.gz dm-kafka-$KAFKA_VERSION
+
+cd ..
 
 echo "Creating RPM..."
-mkdir -p ../../rpm
-$FPM_COMMAND --input-type tar \
-    --output-type rpm \
-    --package ../../rpm \
-    --name kafka \
-    --version $KAFKA_VERSION \
-    --iteration $KAFKA_RELEASE \
-    --license "Apache License 2.0" \
-    --provides "kafka" \
-    --maintainer "Afonso" \
-    --description "Apache Kafka server" \
-    --url "http://kafka.apache.org" \
-    --rpm-user kafka \
-    --rpm-group kafka \
-    --before-install ../../files/add-user.sh \
-    --after-install ../../files/daemon-reload.sh \
-    --before-remove ../../files/stop-kafka.sh \
-    --before-upgrade ../../files/stop-kafka.sh \
-    --after-upgrade ../../files/daemon-reload.sh \
-    kafka-$KAFKA_VERSION.tar.gz
-echo "RPM created and available in rpm folder."
+cp workspace/dm-kafka-$KAFKA_VERSION.tar.gz package/SOURCES/
+cp files/dm-kafka.spec package/SPECS/
+rpmbuild \
+    --define "_topdir $(pwd)/package" \
+    --define "_version $KAFKA_VERSION" \
+    --define "_release $KAFKA_RELEASE" \
+    -bb package/SPECS/dm-kafka.spec

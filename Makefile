@@ -12,11 +12,11 @@ rpms/x86_64/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm: hdf5/CONFIG hdf5/pa
 	mv hdf5/rpm/*.rpm rpms/x86_64
 
 
-kafka: rpms/x86_64/kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).x86_64.rpm
+kafka: rpms/noarch/dm-kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).el7.centos.noarch.rpm
 
-rpms/x86_64/kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).x86_64.rpm: kafka/CONFIG kafka/package_kafka.sh kafka/files/* | rpms/x86_64
+rpms/noarch/dm-kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).el7.centos.noarch.rpm: kafka/CONFIG kafka/package_kafka.sh kafka/files/* | rpms/noarch
 	cd kafka; ./package_kafka.sh
-	mv kafka/rpm/*.rpm rpms/x86_64
+	mv kafka/package/RPMS/noarch/dm-kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).el7.centos.noarch.rpm rpms/noarch/
 
 
 librdkafka: rpms/x86_64/librdkafka1-$(LIBRDKAFKA_VERSION)-$(LIBRDKAFKA_RELEASE).el7.centos.x86_64.rpm
@@ -42,6 +42,9 @@ rpms/x86_64/kafka-manager-$(KAFKA_MANAGER_VERSION)-$(KAFKA_MANAGER_RELEASE).x86_
 
 rpms/x86_64:
 	mkdir -p rpms/x86_64
+
+rpms/noarch:
+	mkdir -p rpms/noarch
 
 
 clean:
