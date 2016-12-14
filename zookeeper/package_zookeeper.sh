@@ -1,14 +1,10 @@
 #!/bin/bash
 
-# Configuration
-if [ -z "$FPM_COMMAND" ] ; then
-    FPM_COMMAND=fpm
-fi
-
 # Prepare environment
-mkdir -p zookeeper
-rm -rf rpm/zookeeper-$ZOOKEEPER_VERSION-$ZOOKEEPER_RELEASE.* zookeeper/packaging zookeeper/zookeeper rpm
-cd zookeeper
+rm -rf package/* workspace/*
+mkdir -p sources package/{BUILD,RPMS,SOURCES,SPECS,SRPMS} workspace
+
+cd sources
 
 if [ ! -f "zookeeper-$ZOOKEEPER_VERSION.tar.gz" ] ; then
     echo "File \"zookeeper-$ZOOKEEPER_VERSION.tar.gz\" not found. Downloading..."
@@ -23,42 +19,34 @@ if [ "$MD5_SUM" != "$ZOOKEEPER_MD5_SUM" ] ; then
     echo "Error: MD5 sum different from expected value. Stopping."
     exit 1
 fi
+
+cd ../workspace
+
 echo "Extracting file..."
-tar xzf zookeeper-$ZOOKEEPER_VERSION.tar.gz
+tar xf ../sources/zookeeper-$ZOOKEEPER_VERSION.tar.gz
 
 echo "Creating package structure..."
-mkdir -p packaging/opt/dm_group
-mkdir -p packaging/var/opt/dm_group/zookeeper
-mkdir -p packaging/var/log/zookeeper
-mkdir -p packaging/etc/systemd/system
-mv zookeeper-$ZOOKEEPER_VERSION packaging/opt/dm_group/zookeeper
-cp ../files/zookeeper.service packaging/etc/systemd/system
-mv packaging/opt/dm_group/zookeeper/conf/zoo_sample.cfg packaging/opt/dm_group/zookeeper/conf/zoo.cfg
-cp ../files/start-zookeeper-service.sh packaging/opt/dm_group/zookeeper/
-chmod u+x packaging/opt/dm_group/zookeeper/start-zookeeper-service.sh
-cd packaging
-echo "Creating file..."
-tar czf zookeeper-$ZOOKEEPER_VERSION.tar.gz etc opt var
+mv zookeeper-$ZOOKEEPER_VERSION zookeeper
+rm -f zookeeper/*.xml
+rm -f zookeeper/zookeeper-*.jar.*
+rm -rf zookeeper/contrib
+rm -rf zookeeper/dist-maven
+rm -rf zookeeper/recipes
+rm -rf zookeeper/src
+mkdir -p files
+cp ../files/start-zookeeper-service.sh zookeeper/
+cp ../files/dm-zookeeper.service files/
+mkdir dm-zookeeper-$ZOOKEEPER_VERSION
+mv zookeeper files dm-zookeeper-$ZOOKEEPER_VERSION/
+tar czf dm-zookeeper-$ZOOKEEPER_VERSION.tar.gz dm-zookeeper-$ZOOKEEPER_VERSION
+
+cd ..
 
 echo "Creating RPM..."
-mkdir -p ../../rpm
-$FPM_COMMAND --input-type tar \
-    --output-type rpm \
-    --package ../../rpm \
-    --name zookeeper \
-    --version $ZOOKEEPER_VERSION \
-    --iteration $ZOOKEEPER_RELEASE \
-    --license "Apache License 2.0" \
-    --provides "zookeeper" \
-    --maintainer "Afonso" \
-    --description "Apache ZooKeeper server" \
-    --url "http://zookeeper.apache.org" \
-    --rpm-user zookeeper \
-    --rpm-group zookeeper \
-    --before-install ../../files/add-user.sh \
-    --after-install ../../files/daemon-reload.sh \
-    --before-remove ../../files/stop-zookeeper.sh \
-    --before-upgrade ../../files/stop-zookeeper.sh \
-    --after-upgrade ../../files/daemon-reload.sh \
-    zookeeper-$ZOOKEEPER_VERSION.tar.gz
-echo "RPM created and available in rpm folder."
+cp workspace/dm-zookeeper-$ZOOKEEPER_VERSION.tar.gz package/SOURCES/
+cp files/dm-zookeeper.spec package/SPECS/
+rpmbuild \
+    --define "_topdir $(pwd)/package" \
+    --define "_version $ZOOKEEPER_VERSION" \
+    --define "_release $ZOOKEEPER_RELEASE" \
+    -bb package/SPECS/dm-zookeeper.spec
