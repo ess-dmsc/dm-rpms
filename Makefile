@@ -5,11 +5,11 @@ include */CONFIG
 all: hdf5 kafka librdkafka zookeeper kafka-manager
 
 
-hdf5: rpms/x86_64/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm
+hdf5: rpms/x86_64/dm-hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).el7.centos.x86_64.rpm
 
-rpms/x86_64/hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).x86_64.rpm: hdf5/CONFIG hdf5/package_hdf5.sh | rpms/x86_64
+rpms/x86_64/dm-hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).el7.centos.x86_64.rpm: hdf5/CONFIG hdf5/package_hdf5.sh hdf5/files/* | rpms/x86_64
 	cd hdf5; ./package_hdf5.sh
-	mv hdf5/rpm/*.rpm rpms/x86_64
+	mv hdf5/package/RPMS/x86_64/dm-hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).el7.centos.x86_64.rpm rpms/x86_64/
 
 
 kafka: rpms/noarch/dm-kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).el7.centos.noarch.rpm
@@ -53,5 +53,5 @@ clean: mostlyclean
 	rm -rf rpms
 
 mostlyclean:
-	rm -rf {kafka,kafka-manager,zookeeper}/{package,sources,workspace}
+	rm -rf {hdf5,kafka,kafka-manager,zookeeper}/{package,sources,workspace}
 	rm -rf librdkafka/sources

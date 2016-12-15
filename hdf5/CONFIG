@@ -1,7 +1,7 @@
 export HDF5_RELEASE=1
-export HDF5_MAJOR=1.10
-export HDF5_MINOR=0
-export HDF5_PATCH=1
+export HDF5_MAJOR=1
+export HDF5_MINOR=8
+export HDF5_PATCH=18
 export HDF5_VERSION=$(HDF5_MAJOR).$(HDF5_MINOR).$(HDF5_PATCH)
-export HDF5_FILE=$(HDF5_MAJOR).$(HDF5_MINOR)-patch$(HDF5_PATCH)
-export HDF5_MD5_SUM=9180ff0ef8dc2ef3f61bd37a7404f295
+export HDF5_FILE=hdf5-$(HDF5_VERSION)-linux-centos7-x86_64-gcc485-noszip-shared
+export HDF5_MD5_SUM=6a43c5fdfea3ee19e9a0f877d7290299
