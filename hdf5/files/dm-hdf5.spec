@@ -13,6 +13,17 @@ BuildArch: x86_64
 Data Management Group HDF5 package.
 
 
+%package -n %{name}-devel
+Summary: DM Group HDF5 development environment package
+Requires: %{name} = %{version}
+
+%description -n %{name}-devel
+Data Management Group HDF5 development environment package.
+
+This package contains headers and libraries required to build applications
+using HDF5.
+
+
 %prep
 %setup -q
 
@@ -27,12 +38,16 @@ rm -rf %{buildroot}
 %files -n %{name}
 %defattr(-,root,root)
 /opt/dm_group/hdf5/bin
-/opt/dm_group/hdf5/include
 /opt/dm_group/hdf5/lib
 %doc /opt/dm_group/hdf5/CHANGES
 %doc /opt/dm_group/hdf5/COPYING
 %doc /opt/dm_group/hdf5/README
 %doc /opt/dm_group/hdf5/RELEASE.txt
+
+
+%files -n %{name}-devel
+%defattr(-,root,root)
+/opt/dm_group/hdf5/include
 %doc /opt/dm_group/hdf5/share
 
 
