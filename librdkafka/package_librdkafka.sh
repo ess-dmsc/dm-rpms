@@ -1,6 +1,8 @@
 #!/bin/bash
 
-mkdir -p sources
+# Prepare environment
+rm -rf package/* workspace/*
+mkdir -p sources package/{BUILD,RPMS,SOURCES,SPECS,SRPMS} workspace
 
 cd sources
 
@@ -13,8 +15,22 @@ else
 fi
 
 cd librdkafka
-
 git checkout $LIBRDKAFKA_VERSION
-make rpm BUILD_NUMBER=$LIBRDKAFKA_RELEASE
+cd ..
+
+cd ../workspace
+
+cp -r ../sources/librdkafka dm-librdkafka-$LIBRDKAFKA_VERSION
+cp ../files/CHANGES dm-librdkafka-$LIBRDKAFKA_VERSION/
+tar czf dm-librdkafka-$LIBRDKAFKA_VERSION.tar.gz dm-librdkafka-$LIBRDKAFKA_VERSION
 
 cd ..
+
+echo "Creating RPM..."
+cp workspace/dm-librdkafka-$LIBRDKAFKA_VERSION.tar.gz package/SOURCES/
+cp files/dm-librdkafka.spec package/SPECS/
+rpmbuild \
+    --define "_topdir $(pwd)/package" \
+    --define "_version $LIBRDKAFKA_VERSION" \
+    --define "_release $LIBRDKAFKA_RELEASE" \
+    -bb package/SPECS/dm-librdkafka.spec

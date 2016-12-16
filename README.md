@@ -6,18 +6,14 @@ Management group.
 
 ## Requirements
 
-- rpm-build
-- mock (see Instructions below)
+- cyrus-sasl-devel
+- gcc
+- g++
 - javac
-
-
-## Instructions
-
-Add the user who will run the scripts to the *mock* group by running
-
-    $ sudo usermod -a -G mock <user>
-
-substituting `<user>` with the user name.
+- openssl-devel
+- python
+- rpm-build
+- zlib-devel
 
 
 ## Creating an RPM
