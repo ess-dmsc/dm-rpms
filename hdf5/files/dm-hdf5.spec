@@ -30,7 +30,9 @@ using HDF5.
 %install
 rm -rf %{buildroot}
 install -d %{buildroot}/opt/dm_group
+install -d %{buildroot}/etc/profile.d
 cp -r hdf5 %{buildroot}/opt/dm_group/
+cp dm-hdf5-env.sh %{buildroot}/etc/profile.d/dm-hdf5-env.sh
 
 %clean
 rm -rf %{buildroot}
@@ -38,8 +40,8 @@ rm -rf %{buildroot}
 %files -n %{name}
 %defattr(-,root,root)
 /opt/dm_group/hdf5/bin
-/opt/dm_group/hdf5/etc
 /opt/dm_group/hdf5/lib
+/etc/profile.d/dm-hdf5-env.sh
 %doc /opt/dm_group/hdf5/CHANGES
 %doc /opt/dm_group/hdf5/COPYING
 %doc /opt/dm_group/hdf5/README
@@ -54,5 +56,8 @@ rm -rf %{buildroot}
 
 %changelog
 
-* Thu Dec 15 2016 Afonso Mukai <afonso.mukai@esss.se> - 1.8.18
+* Wed Dec 21 2016 Afonso Mukai <afonso.mukai@esss.se> 1.8.18
+- Add library path script to /etc/profile.d
+
+* Thu Dec 15 2016 Afonso Mukai <afonso.mukai@esss.se> 1.8.18
 - Initial package with dm prefix

@@ -2,4 +2,4 @@ This package was created from the binaries available from the HDF5 Group
 (https://support.hdfgroup.org/HDF5/). For dates of change, see the RPM
 changelog.
 
-The file etc/dm-hdf5-env.sh was added to set the library path.
+The file /etc/dm-hdf5-env.sh was added to set the library path.

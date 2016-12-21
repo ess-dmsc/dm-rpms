@@ -1,4 +1,4 @@
-export HDF5_RELEASE=2
+export HDF5_RELEASE=3
 export HDF5_MAJOR=1
 export HDF5_MINOR=8
 export HDF5_PATCH=18
