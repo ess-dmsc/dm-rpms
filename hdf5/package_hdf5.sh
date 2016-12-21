@@ -27,7 +27,9 @@ tar xf ../sources/$HDF5_FILE.tar.gz
 
 echo "Creating package structure..."
 mv $HDF5_FILE hdf5
+mkdir hdf5/etc
 cp ../files/CHANGES hdf5/
+cp ../files/dm-hdf5-env.sh hdf5/etc/
 mkdir dm-hdf5-$HDF5_VERSION
 mv hdf5 dm-hdf5-$HDF5_VERSION
 tar czf dm-hdf5-$HDF5_VERSION.tar.gz dm-hdf5-$HDF5_VERSION

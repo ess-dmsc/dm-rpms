@@ -38,6 +38,7 @@ rm -rf %{buildroot}
 %files -n %{name}
 %defattr(-,root,root)
 /opt/dm_group/hdf5/bin
+/opt/dm_group/hdf5/etc
 /opt/dm_group/hdf5/lib
 %doc /opt/dm_group/hdf5/CHANGES
 %doc /opt/dm_group/hdf5/COPYING
