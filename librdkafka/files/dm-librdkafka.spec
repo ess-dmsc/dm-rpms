@@ -2,7 +2,7 @@ Name:    dm-librdkafka
 Version: %{_version}
 Release: %{_release}%{?dist}
 %define soname 1
-%define dm_group_prefix /opt/dm_group/librdkafka
+%define dm_group_prefix /opt/dm_group/usr
 
 Summary: DM Group librdkafka package
 License: BSD-2-Clause
@@ -51,9 +51,10 @@ make
 %install
 rm -rf %{buildroot}
 DESTDIR=%{buildroot} make install
+install -d %{buildroot}%{dm_group_prefix}/share/librdkafka
 cp README.md CONFIGURATION.md INTRODUCTION.md LICENSE LICENSE.pycrc \
     LICENSE.queue LICENSE.snappy LICENSE.tinycthread LICENSE.wingetopt \
-    CHANGES %{buildroot}%{dm_group_prefix}
+    CHANGES %{buildroot}%{dm_group_prefix}/share/librdkafka/
 
 %clean
 rm -rf %{buildroot}
@@ -63,16 +64,7 @@ rm -rf %{buildroot}
 %{dm_group_prefix}/lib/librdkafka.so.%{soname}
 %{dm_group_prefix}/lib/librdkafka++.so.%{soname}
 %defattr(-,root,root)
-%doc %{dm_group_prefix}/README.md
-%doc %{dm_group_prefix}/CONFIGURATION.md
-%doc %{dm_group_prefix}/INTRODUCTION.md
-%doc %{dm_group_prefix}/LICENSE
-%doc %{dm_group_prefix}/LICENSE.pycrc
-%doc %{dm_group_prefix}/LICENSE.queue
-%doc %{dm_group_prefix}/LICENSE.snappy
-%doc %{dm_group_prefix}/LICENSE.tinycthread
-%doc %{dm_group_prefix}/LICENSE.wingetopt
-%doc %{dm_group_prefix}/CHANGES
+%doc %{dm_group_prefix}/share/librdkafka
 
 
 %files -n %{name}-devel
@@ -88,5 +80,9 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Fri Dec 16 2016 Afonso Mukai <afonso.mukai@esss.se> - 0.9.1
+
+* Fri Jan 13 2017 Afonso Mukai <afonso.mukai@esss.se> 0.9.2
+- Change installation prefix to /opt/dm_group/usr
+
+* Fri Dec 16 2016 Afonso Mukai <afonso.mukai@esss.se> 0.9.1
 - Initial package with dm prefix

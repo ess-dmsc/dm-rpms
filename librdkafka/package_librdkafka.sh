@@ -15,7 +15,7 @@ else
 fi
 
 cd librdkafka
-git checkout $LIBRDKAFKA_VERSION
+git checkout v$LIBRDKAFKA_VERSION
 cd ..
 
 cd ../workspace
