@@ -29,32 +29,38 @@ using HDF5.
 
 %install
 rm -rf %{buildroot}
-install -d %{buildroot}/opt/dm_group
-install -d %{buildroot}/etc/profile.d
-cp -r hdf5 %{buildroot}/opt/dm_group/
-cp dm-hdf5-env.sh %{buildroot}/etc/profile.d/dm-hdf5-env.sh
+install -d %{buildroot}/opt/dm_group/usr/bin
+install -d %{buildroot}/opt/dm_group/usr/include
+install -d %{buildroot}/opt/dm_group/usr/lib
+install -d %{buildroot}/opt/dm_group/usr/share/hdf5
+cp -r bin/* %{buildroot}/opt/dm_group/usr/bin/
+cp -r include/* %{buildroot}/opt/dm_group/usr/include/
+cp -r lib/* %{buildroot}/opt/dm_group/usr/lib/
+cp -r share/* %{buildroot}/opt/dm_group/usr/share/
 
 %clean
 rm -rf %{buildroot}
 
 %files -n %{name}
 %defattr(-,root,root)
-/opt/dm_group/hdf5/bin
-/opt/dm_group/hdf5/lib
-/etc/profile.d/dm-hdf5-env.sh
-%doc /opt/dm_group/hdf5/CHANGES
-%doc /opt/dm_group/hdf5/COPYING
-%doc /opt/dm_group/hdf5/README
-%doc /opt/dm_group/hdf5/RELEASE.txt
+/opt/dm_group/usr/bin
+/opt/dm_group/usr/lib
+%doc /opt/dm_group/usr/share/hdf5/CHANGES
+%doc /opt/dm_group/usr/share/hdf5/COPYING
+%doc /opt/dm_group/usr/share/hdf5/README
+%doc /opt/dm_group/usr/share/hdf5/RELEASE.txt
 
 
 %files -n %{name}-devel
 %defattr(-,root,root)
-/opt/dm_group/hdf5/include
-%doc /opt/dm_group/hdf5/share
+/opt/dm_group/usr/include
+%doc /opt/dm_group/usr/share/hdf5_examples
 
 
 %changelog
+
+* Fri Jan 13 2017 Afonso Mukai <afonso.mukai@esss.se> 1.8.18
+- Change installation prefix to /opt/dm_group/usr
 
 * Wed Dec 21 2016 Afonso Mukai <afonso.mukai@esss.se> 1.8.18
 - Add library path script to /etc/profile.d

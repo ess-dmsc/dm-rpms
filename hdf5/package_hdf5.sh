@@ -27,9 +27,10 @@ tar xf ../sources/$HDF5_FILE.tar.gz
 
 echo "Creating package structure..."
 mkdir dm-hdf5-$HDF5_VERSION
-mv $HDF5_FILE dm-hdf5-$HDF5_VERSION/hdf5
-cp ../files/CHANGES dm-hdf5-$HDF5_VERSION/hdf5
-cp ../files/dm-hdf5-env.sh dm-hdf5-$HDF5_VERSION/
+mv $HDF5_FILE/* dm-hdf5-$HDF5_VERSION/
+mkdir -p dm-hdf5-$HDF5_VERSION/share/hdf5
+cp ../files/CHANGES dm-hdf5-$HDF5_VERSION/share/hdf5/
+mv dm-hdf5-$HDF5_VERSION/{COPYING,README,RELEASE.txt} dm-hdf5-$HDF5_VERSION/share/hdf5/
 tar czf dm-hdf5-$HDF5_VERSION.tar.gz dm-hdf5-$HDF5_VERSION
 
 cd ..
