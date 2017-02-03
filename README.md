@@ -9,6 +9,7 @@ Management group.
 - cyrus-sasl-devel
 - doxygen
 - gcc
+- git
 - g++
 - javac
 - openssl-devel
