@@ -1,16 +1,22 @@
 include */CONFIG
 
-.PHONY: all flatbuffers hdf5 kafka librdkafka zookeeper kafka-manager rapidjson clean mostlyclean
+.PHONY: all flatbuffers fmt hdf5 kafka librdkafka zookeeper kafka-manager rapidjson clean mostlyclean
 
-all: flatbuffers hdf5 kafka librdkafka zookeeper kafka-manager rapidjson
+all: flatbuffers fmt hdf5 kafka librdkafka zookeeper kafka-manager rapidjson
 
 
 flatbuffers: rpms/x86_64/dm-flatbuffers-$(FLATBUFFERS_VERSION)-$(FLATBUFFERS_RELEASE).el7.centos.x86_64.rpm
 
-
 rpms/x86_64/dm-flatbuffers-$(FLATBUFFERS_VERSION)-$(FLATBUFFERS_RELEASE).el7.centos.x86_64.rpm: flatbuffers/CONFIG flatbuffers/package_flatbuffers.sh flatbuffers/files/* | rpms/x86_64
 	cd flatbuffers; ./package_flatbuffers.sh
 	mv flatbuffers/package/RPMS/x86_64/dm-flatbuffers-$(FLATBUFFERS_VERSION)-$(FLATBUFFERS_RELEASE).el7.centos.x86_64.rpm rpms/x86_64/
+
+
+fmt: rpms/x86_64/dm-fmt-$(FMT_VERSION)-$(FMT_RELEASE).el7.centos.x86_64.rpm
+
+rpms/x86_64/dm-fmt-$(FMT_VERSION)-$(FMT_RELEASE).el7.centos.x86_64.rpm: fmt/CONFIG fmt/package_fmt.sh fmt/files/* | rpms/x86_64
+	cd fmt; ./package_fmt.sh
+	mv fmt/package/RPMS/x86_64/dm-fmt-$(FMT_VERSION)-$(FMT_RELEASE).el7.centos.x86_64.rpm rpms/x86_64/
 
 
 hdf5: rpms/x86_64/dm-hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).el7.centos.x86_64.rpm
@@ -67,4 +73,4 @@ clean: mostlyclean
 	rm -rf rpms
 
 mostlyclean:
-	rm -rf {flatbuffers,hdf5,kafka,kafka-manager,librdkafka,rapidjson,zookeeper}/{package,sources,workspace}
+	rm -rf {flatbuffers,fmt,hdf5,kafka,kafka-manager,librdkafka,rapidjson,zookeeper}/{package,sources,workspace}

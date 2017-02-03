@@ -6,6 +6,7 @@ Management group.
 
 ## Requirements
 
+- cmake (>= 2.8.12)
 - cyrus-sasl-devel
 - doxygen
 - gcc
