@@ -7,6 +7,7 @@ Management group.
 ## Requirements
 
 - cyrus-sasl-devel
+- doxygen
 - gcc
 - g++
 - javac
