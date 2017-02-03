@@ -1,8 +1,8 @@
 include */CONFIG
 
-.PHONY: all hdf5 kafka librdkafka zookeeper kafka-manager clean mostlyclean
+.PHONY: all hdf5 kafka librdkafka zookeeper kafka-manager rapidjson clean mostlyclean
 
-all: hdf5 kafka librdkafka zookeeper kafka-manager
+all: hdf5 kafka librdkafka zookeeper kafka-manager rapidjson
 
 
 hdf5: rpms/x86_64/dm-hdf5-$(HDF5_VERSION)-$(HDF5_RELEASE).el7.centos.x86_64.rpm
