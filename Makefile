@@ -41,6 +41,12 @@ rpms/noarch/dm-kafka-manager-$(KAFKA_MANAGER_VERSION)-$(KAFKA_MANAGER_RELEASE).e
 	cd kafka-manager; ./package_kafka_manager.sh
 	mv kafka-manager/package/RPMS/noarch/dm-kafka-manager-$(KAFKA_MANAGER_VERSION)-$(KAFKA_MANAGER_RELEASE).el7.centos.noarch.rpm rpms/noarch/
 
+rapidjson: rpms/x86_64/dm-rapidjson-devel-$(RAPIDJSON_VERSION)-$(RAPIDJSON_RELEASE).el7.centos.x86_64.rpm
+
+rpms/x86_64/dm-rapidjson-devel-$(RAPIDJSON_VERSION)-$(RAPIDJSON_RELEASE).el7.centos.x86_64.rpm: rapidjson/CONFIG rapidjson/package_rapidjson.sh rapidjson/files/* | rpms/x86_64
+	cd rapidjson; ./package_rapidjson.sh
+	mv rapidjson/package/RPMS/x86_64/dm-rapidjson-devel-$(RAPIDJSON_VERSION)-$(RAPIDJSON_RELEASE).el7.centos.x86_64.rpm rpms/x86_64/
+
 
 rpms/x86_64:
 	mkdir -p rpms/x86_64
@@ -53,4 +59,4 @@ clean: mostlyclean
 	rm -rf rpms
 
 mostlyclean:
-	rm -rf {hdf5,kafka,kafka-manager,librdkafka,zookeeper}/{package,sources,workspace}
+	rm -rf {hdf5,kafka,kafka-manager,librdkafka,rapidjson,zookeeper}/{package,sources,workspace}
