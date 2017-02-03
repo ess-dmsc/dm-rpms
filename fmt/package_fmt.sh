@@ -27,7 +27,7 @@ cd ..
 
 echo "Creating RPM..."
 if [ "$CMAKE3_ROOT" ] ; then
-    export PATH=$CMAKE3_ROOT:$PATH
+    export PATH=$CMAKE3_ROOT/bin:$PATH
     which cmake
 fi
 cp workspace/dm-fmt-$FMT_VERSION.tar.gz package/SOURCES/
