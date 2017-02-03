@@ -4,7 +4,7 @@ Release: %{_release}%{?dist}
 %define dm_group_prefix /opt/dm_group/usr
 
 Summary: DM Group rapidjson package
-License: RapidJSON
+License: MIT
 URL:     https://github.com/miloyip/rapidjson
 Source:	 dm-rapidjson-devel-%{version}.tar.gz
 
