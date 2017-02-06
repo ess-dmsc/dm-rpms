@@ -21,7 +21,6 @@ cd ..
 cd ../workspace
 
 cp -r ../sources/rapidjson dm-rapidjson-devel-$RAPIDJSON_VERSION
-cp ../files/CHANGES dm-rapidjson-devel-$RAPIDJSON_VERSION/
 tar czf dm-rapidjson-devel-$RAPIDJSON_VERSION.tar.gz dm-rapidjson-devel-$RAPIDJSON_VERSION
 
 cd ..

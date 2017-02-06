@@ -21,7 +21,6 @@ cd ..
 cd ../workspace
 
 cp -r ../sources/flatbuffers dm-flatbuffers-$FLATBUFFERS_VERSION
-cp ../files/CHANGES dm-flatbuffers-$FLATBUFFERS_VERSION/
 tar czf dm-flatbuffers-$FLATBUFFERS_VERSION.tar.gz dm-flatbuffers-$FLATBUFFERS_VERSION
 
 cd ..
