@@ -23,6 +23,7 @@ rm -rf %{buildroot}
 install -d %{buildroot}/opt/dm_group/zookeeper
 install -d %{buildroot}/etc/systemd/system
 install -d %{buildroot}/var/opt/dm_group/zookeeper
+install -d %{buildroot}/var/log/dm_group/zookeeper
 cp -r zookeeper %{buildroot}/opt/dm_group/
 cp files/dm-zookeeper.service %{buildroot}/etc/systemd/system/
 
@@ -45,6 +46,7 @@ rm -rf %{buildroot}
 /opt/dm_group/zookeeper/lib
 /opt/dm_group/zookeeper/zookeeper-*.jar
 /var/opt/dm_group/zookeeper
+/var/log/dm_group/zookeeper
 %attr(755,zookeeper,zookeeper) /opt/dm_group/zookeeper/start-zookeeper-service.sh
 %attr(644,root,root) /etc/systemd/system/dm-zookeeper.service
 %config /opt/dm_group/zookeeper/conf
@@ -53,6 +55,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+
+* Tue Feb 07 2017 Afonso Mukai <afonso.mukai@esss.se> - 3.4.9
+- Add log directory
 
 * Wed Dec 14 2016 Afonso Mukai <afonso.mukai@esss.se> - 3.4.9
 - Initial package with dm prefix
