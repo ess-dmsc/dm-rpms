@@ -33,6 +33,7 @@ rm -rf zookeeper/contrib
 rm -rf zookeeper/dist-maven
 rm -rf zookeeper/recipes
 rm -rf zookeeper/src
+mv zookeeper/conf/zoo_sample.cfg zookeeper/conf/zoo.cfg
 mkdir -p files
 cp ../files/start-zookeeper-service.sh zookeeper/
 cp ../files/dm-zookeeper.service files/
