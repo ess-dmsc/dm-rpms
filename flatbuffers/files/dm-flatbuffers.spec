@@ -10,8 +10,6 @@ Source:	 dm-flatbuffers-%{version}.tar.gz
 
 BuildRequires: cmake gcc gcc-c++
 
-Requires: libstdc++
-
 %description
 Data Management Group FlatBuffers package
 
@@ -50,6 +48,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+
+* Tue Apr 11 2017 Afonso Mukai <afonso.mukai@esss.se> 1.5.0
+- Remove requires
 
 * Fri Feb 3 2017 Afonso Mukai <afonso.mukai@esss.se> 1.5.0
 - Initial package
