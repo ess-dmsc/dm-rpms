@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=kafka
 Group=kafka
-Environment="LOG_DIR=/var/log/kafka"
+Environment="LOG_DIR=/var/log/dm_group/kafka"
 Environment="JMX_PORT=9990"
 WorkingDirectory=/var/opt/dm_group/kafka
 ExecStart=/opt/dm_group/kafka/start-kafka-service.sh
