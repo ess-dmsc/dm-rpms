@@ -31,6 +31,7 @@ mv kafka_$SCALA_VERSION-$KAFKA_VERSION kafka
 mkdir -p files
 cp ../files/start-kafka-service.sh kafka/
 cp ../files/dm-kafka.service files/
+cp ../files/server.properties files/
 mkdir dm-kafka-$KAFKA_VERSION
 mv kafka files dm-kafka-$KAFKA_VERSION/
 tar czf dm-kafka-$KAFKA_VERSION.tar.gz dm-kafka-$KAFKA_VERSION

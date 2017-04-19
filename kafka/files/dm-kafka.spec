@@ -19,10 +19,12 @@ Data Management Group Apache Kafka package.
 %install
 rm -rf %{buildroot}
 install -d %{buildroot}/opt/dm_group/kafka
+install -d %{buildroot}/etc/opt/dm_group/kafka
 install -d %{buildroot}/etc/systemd/system
 install -d %{buildroot}/var/opt/dm_group/kafka
 install -d %{buildroot}/var/log/dm_group/kafka
 cp -r kafka %{buildroot}/opt/dm_group/
+cp files/server.properties %{buildroot}/etc/opt/dm_group/kafka/
 cp files/dm-kafka.service %{buildroot}/etc/systemd/system/
 
 %pre
@@ -46,6 +48,7 @@ rm -rf %{buildroot}
 /var/log/dm_group/kafka
 %attr(755,kafka,kafka) /opt/dm_group/kafka/start-kafka-service.sh
 %attr(644,root,root) /etc/systemd/system/dm-kafka.service
+%config(noreplace) /etc/opt/dm_group/kafka/server.properties
 %config /opt/dm_group/kafka/config
 %doc /opt/dm_group/kafka/LICENSE
 %doc /opt/dm_group/kafka/NOTICE
@@ -53,6 +56,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+
+* Wed Apr 19 2017 Afonso Mukai <afonso.mukai@esss.se> - 0.10.2.0
+- Add server.properties to /etc/opt/dm_group/kafka
 
 * Wed Dec 14 2016 Afonso Mukai <afonso.mukai@esss.se> - 0.10.0.1
 - Initial package with dm prefix
