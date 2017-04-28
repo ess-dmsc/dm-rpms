@@ -17,9 +17,20 @@ node('rpm-packager') {
 
     stage('Build') {
         sh "make && make mostlyclean"
+        stash includes: 'rpms/**/*.rpm', name: 'rpms'
+    }
+}
+
+node('yum-repo') {
+    stage('Unstash') {
+        unstash 'rpms'
+    }
+
+    stage('Create Repo') {
+        sh "createrepo rpms"
     }
 
     stage('Archive') {
-        archiveArtifacts artifacts: 'rpms/**/*.rpm', fingerprint: true, onlyIfSuccessful: true
+        archiveArtifacts artifacts: 'rpms/', fingerprint: true, onlyIfSuccessful: true
     }
 }
