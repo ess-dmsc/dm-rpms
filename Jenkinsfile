@@ -15,11 +15,9 @@ node('rpm-packager') {
     checkout scm
 
     stage 'Build'
-    sh "cd dm-rpms && \
-        make && \
-        make mostlyclean"
+    sh "make && make mostlyclean"
     step([$class: 'ClaimPublisher']) // Allow broken build claiming.
 
     stage 'Archive'
-    archiveArtifacts artifacts: 'dm-rpms/rpms/**/*.rpm', fingerprint: true, onlyIfSuccessful: true
+    archiveArtifacts artifacts: 'rpms/**/*.rpm', fingerprint: true, onlyIfSuccessful: true
 }
