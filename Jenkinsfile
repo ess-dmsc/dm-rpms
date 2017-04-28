@@ -16,7 +16,7 @@ node('rpm-packager') {
     }
 
     stage('Build') {
-        sh "make librdkafka && make mostlyclean"
+        sh "make && make mostlyclean"
     }
 
     stage('Archive') {
