@@ -11,13 +11,15 @@ node('rpm-packager') {
         ]
     ]]);
 
-    stage 'Checkout'
-    checkout scm
+    stage('Checkout') {
+        checkout scm
+    }
 
-    stage 'Build'
-    sh "make && make mostlyclean"
-    step([$class: 'ClaimPublisher']) // Allow broken build claiming.
+    stage('Build') {
+        sh "make librdkafka && make mostlyclean"
+    }
 
-    stage 'Archive'
-    archiveArtifacts artifacts: 'rpms/**/*.rpm', fingerprint: true, onlyIfSuccessful: true
+    stage('Archive') {
+        archiveArtifacts artifacts: 'rpms/**/*.rpm', fingerprint: true, onlyIfSuccessful: true
+    }
 }
