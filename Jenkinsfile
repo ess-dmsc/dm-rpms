@@ -21,8 +21,5 @@ node('rpm-packager') {
     step([$class: 'ClaimPublisher']) // Allow broken build claiming.
 
     stage 'Archive'
-    archiveArtifacts
-        artifacts: 'dm-rpms/rpms/**/*.rpm',
-        fingerprint: true,
-        onlyIfSuccessful: true
+    archiveArtifacts artifacts: 'dm-rpms/rpms/**/*.rpm', fingerprint: true, onlyIfSuccessful: true
 }
