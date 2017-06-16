@@ -1,3 +1,9 @@
+def failure_function(exception_obj, failureMessage) {
+    def toEmails = [[$class: 'DevelopersRecipientProvider']]
+    emailext body: '${DEFAULT_CONTENT}\n\"' + failureMessage + '\"\n\nCheck console output at $BUILD_URL to view the results.', recipientProviders: toEmails, subject: '${DEFAULT_SUBJECT}'
+    throw exception_obj
+}
+
 node('rpm-packager') {
     // Set number of old builds to keep.
     properties([[
@@ -10,27 +16,47 @@ node('rpm-packager') {
             numToKeepStr: ''
         ]
     ]]);
-
-    stage('Checkout') {
-        checkout scm
+    
+    try {
+        stage('Checkout') {
+            checkout scm
+        }
+    } catch (e) {
+        failure_function(e, 'Checkout failed')
     }
-
-    stage('Build') {
-        sh "make && make mostlyclean"
-        stash includes: 'rpms/**/*.rpm', name: 'rpms'
+    
+    try {
+        stage('Build') {
+            sh "make && make mostlyclean"
+            stash includes: 'rpms/**/*.rpm', name: 'rpms'
+        }
+    } catch (e) {
+        failure_function(e, 'Build failed')
     }
 }
 
 node('yum-repo') {
-    stage('Unstash') {
-        unstash 'rpms'
+    try {
+        stage('Unstash') {
+            unstash 'rpms'
+        }
+    } catch (e) {
+        failure_function(e, 'Unstash failed')
     }
-
-    stage('Create Repo') {
-        sh "createrepo rpms"
+    
+    try {
+        stage('Create Repo') {
+            sh "createrepo rpms"
+        }
+    } catch (e) {
+        failure_function(e, 'Create repo failed')
     }
-
-    stage('Archive') {
-        archiveArtifacts artifacts: 'rpms/', fingerprint: true, onlyIfSuccessful: true
+    
+    try {
+        stage('Archive') {
+            archiveArtifacts artifacts: 'rpms/', fingerprint: true, onlyIfSuccessful: true
+        }
+    } catch (e) {
+        failure_function(e, 'Archive failed')
     }
 }
