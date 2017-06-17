@@ -8,7 +8,7 @@ cd sources
 
 if [ ! -f "$HDF5_FILE.tar.gz" ] ; then
     echo "File \"$HDF5_FILE.tar.gz\" not found. Downloading..."
-    curl -LO https://support.hdfgroup.org/ftp/HDF5/current18/bin/linux-centos7-x86_64-gcc485-noszip/$HDF5_FILE.tar.gz
+    curl -LO https://support.hdfgroup.org/ftp/HDF5/current18/bin/linux-centos7-x86_64-gcc485/$HDF5_FILE.tar.gz
 else
     echo "File \"$HDF5_FILE.tar.gz\" found. Skipping download."
 fi
