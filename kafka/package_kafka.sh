@@ -36,6 +36,10 @@ echo "Building kafka-graphite..."
 cp -r ../sources/kafka-graphite kafka-graphite
 cd kafka-graphite
 mvn package
+if [ $? -ne 0 ] ; then
+    echo "Error: 'mvn package' returned non-zero value. Stopping."
+    exit 1
+fi
 cd ..
 
 echo "Extracting file..."
