@@ -21,7 +21,22 @@ if [ "$MD5_SUM" != "$KAFKA_MD5_SUM" ] ; then
     exit 1
 fi
 
+# Get kafka-graphite
+if [ ! -d kafka-graphite ] ; then
+    git clone https://github.com/damienclaveau/kafka-graphite.git
+else
+    cd kafka-graphite
+    git pull origin master
+    cd ..
+fi
+
 cd ../workspace
+
+echo "Building kafka-graphite..."
+cp -r ../sources/kafka-graphite kafka-graphite
+cd kafka-graphite
+mvn package
+cd ..
 
 echo "Extracting file..."
 tar xzf ../sources/kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz
@@ -32,6 +47,8 @@ mkdir -p files
 cp ../files/start-kafka-service.sh kafka/
 cp ../files/dm-kafka.service files/
 cp ../files/server.properties files/
+cp kafka-graphite/target/kafka-graphite-1.0.5.jar kafka/libs/
+cp kafka-graphite/LICENSE kafka/LICENSE.kafka-graphite
 mkdir dm-kafka-$KAFKA_VERSION
 mv kafka files dm-kafka-$KAFKA_VERSION/
 tar czf dm-kafka-$KAFKA_VERSION.tar.gz dm-kafka-$KAFKA_VERSION

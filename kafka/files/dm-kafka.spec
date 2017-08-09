@@ -12,6 +12,8 @@ BuildArch: noarch
 %description
 Data Management Group Apache Kafka package.
 
+Includes kafka-graphite.
+
 
 %prep
 %setup -q
@@ -51,11 +53,15 @@ rm -rf %{buildroot}
 %config(noreplace) /etc/opt/dm_group/kafka/server.properties
 %config /opt/dm_group/kafka/config
 %doc /opt/dm_group/kafka/LICENSE
+%doc /opt/dm_group/kafka/LICENSE.kafka-graphite
 %doc /opt/dm_group/kafka/NOTICE
 %doc /opt/dm_group/kafka/site-docs
 
 
 %changelog
+
+* Wed Aug 9 2017 Afonso Mukai <afonso.mukai@esss.se> - 0.10.2.0
+- Add kafka-graphite
 
 * Wed Apr 19 2017 Afonso Mukai <afonso.mukai@esss.se> - 0.10.2.0
 - Add server.properties to /etc/opt/dm_group/kafka
