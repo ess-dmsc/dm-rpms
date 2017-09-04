@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Prepare environment
-SCALA_VERSION=2.12
+SCALA_VERSION=2.11
 rm -rf package/* workspace/*
 mkdir -p sources package/{BUILD,RPMS,SOURCES,SPECS,SRPMS} workspace
 
