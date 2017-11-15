@@ -8,7 +8,7 @@ User=zookeeper
 Environment=ZOO_LOG_DIR=/var/log/dm_group/zookeeper
 WorkingDirectory=/var/opt/dm_group/zookeeper
 ExecStart=/opt/dm_group/zookeeper/start-zookeeper-service.sh
-Restart=on-abort
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
