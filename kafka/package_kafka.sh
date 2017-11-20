@@ -14,10 +14,10 @@ else
     echo "File \"kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz\" found. Skipping download."
 fi
 
-echo "Comparing MD5 sums..."
-MD5_SUM=$(openssl dgst -md5 kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz | awk '{print $2}')
-if [ "$MD5_SUM" != "$KAFKA_MD5_SUM" ] ; then
-    echo "Error: MD5 sum different from expected value. Stopping."
+echo "Comparing SHA512..."
+SHA512_SUM=$(openssl dgst -sha512 kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz | awk '{print $2}')
+if [ "$SHA512_SUM" != "$KAFKA_SHA512_SUM" ] ; then
+    echo "Error: SHA512 different from expected value. Stopping."
     exit 1
 fi
 
