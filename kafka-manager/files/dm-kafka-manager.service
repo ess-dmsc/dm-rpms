@@ -9,7 +9,7 @@ WorkingDirectory=/var/opt/dm_group/kafka-manager
 ExecStart=/opt/dm_group/kafka-manager/start-kafka-manager-service.sh
 Restart=on-failure
 ExecStopPost=/usr/bin/sleep 1
-ExecStopPost=/usr/bin/rm /var/opt/dm_group/kafka-manager/kafka-manager.pid
+ExecStopPost=/usr/bin/rm -f /var/opt/dm_group/kafka-manager/kafka-manager.pid
 
 [Install]
 WantedBy=multi-user.target
