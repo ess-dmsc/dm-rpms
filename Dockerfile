@@ -10,6 +10,7 @@ git \
 g++ \
 javac \
 make \
+openssl \
 openssl-devel \
 python \
 rpm-build \
