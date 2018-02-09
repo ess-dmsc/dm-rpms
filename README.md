@@ -23,6 +23,17 @@ Management group.
 - zlib-devel
 
 
+# To create rpms
+
+You can install Docker and run
+```
+docker build .
+```
+or 
+```
+docker-compose build
+```
+
 ## Creating an RPM
 
 A Makefile is provided for running the scripts to create the RPMs. The default
