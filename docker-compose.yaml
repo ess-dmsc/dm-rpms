@@ -2,6 +2,4 @@ version: '2'
 services:
   dmrpm:
     build: .
-    volumes:
-      - ./.:/usr/src/app/
 
