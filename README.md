@@ -10,9 +10,13 @@ Management group.
 - cyrus-sasl-devel
 - doxygen
 - gcc
+- gcc-g++ 
 - git
 - g++
 - javac
+- make
+- maven
+- openssl 
 - openssl-devel
 - python
 - rpm-build
