@@ -27,13 +27,6 @@ RUN mkdir -p   /root/.sbt/launchers/0.13.9/
 RUN mv sbt-launch.jar  /root/.sbt/launchers/0.13.9/
 
 #RUN make all
-RUN make flatbuffers 
-RUN make fmt 
-RUN make hdf5 
-RUN make kafka 
-RUN make librdkafka
+RUN make kafka
 RUN make zookeeper
-RUN make kafka-manager 
-RUN make rapidjson
-
-
+RUN make kafka-manager
