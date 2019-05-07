@@ -29,10 +29,14 @@ echo "Creating package structure..."
 mv zookeeper-$ZOOKEEPER_VERSION zookeeper
 rm -f zookeeper/*.xml
 rm -f zookeeper/zookeeper-*.jar.*
-rm -rf zookeeper/contrib
 rm -rf zookeeper/dist-maven
-rm -rf zookeeper/recipes
 rm -rf zookeeper/src
+rm -rf zookeeper/zookeeper-client
+rm -rf zookeeper/zookeeper-contrib
+rm -rf zookeeper/zookeeper-it
+rm -rf zookeeper/zookeeper-jute
+rm -rf zookeeper/zookeeper-recipes
+rm -rf zookeeper/zookeeper-server
 mv zookeeper/conf/zoo_sample.cfg zookeeper/conf/zoo.cfg
 mkdir -p files
 cp ../files/start-zookeeper-service.sh zookeeper/

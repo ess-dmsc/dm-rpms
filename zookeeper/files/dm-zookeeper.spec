@@ -50,11 +50,15 @@ rm -rf %{buildroot}
 %attr(755,zookeeper,zookeeper) /opt/dm_group/zookeeper/start-zookeeper-service.sh
 %attr(644,root,root) /etc/systemd/system/dm-zookeeper.service
 %config /opt/dm_group/zookeeper/conf
+%doc /opt/dm_group/zookeeper/*.md
 %doc /opt/dm_group/zookeeper/*.txt
-%doc /opt/dm_group/zookeeper/docs
+%doc /opt/dm_group/zookeeper/zookeeper-docs
 
 
 %changelog
+
+* Tue May 07 2019 Afonso Mukai <afonso.mukai@esss.se> - 3.4.14
+- Update docs directory name
 
 * Tue Feb 07 2017 Afonso Mukai <afonso.mukai@esss.se> - 3.4.9
 - Add log directory
