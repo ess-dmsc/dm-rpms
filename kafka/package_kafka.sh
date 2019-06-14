@@ -14,30 +14,36 @@ else
     echo "File \"kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz\" found. Skipping download."
 fi
 
-echo "Comparing SHA512..."
-SHA512_SUM=$(openssl dgst -sha512 kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz | awk '{print $2}')
-if [ "$SHA512_SUM" != "$KAFKA_SHA512_SUM" ] ; then
-    echo "Error: SHA512 different from expected value. Stopping."
+echo "Comparing Kafka SHA512..."
+SHA512_SUM1=$(openssl dgst -sha512 kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz | awk '{print $2}')
+if [ "$SHA512_SUM1" != "$KAFKA_SHA512_SUM" ] ; then
+    echo "Error: Kafka SHA512 different from expected value. Stopping."
     exit 1
 fi
 
-# Get kafka-graphite
-if [ ! -d kafka-graphite ] ; then
-    git clone https://github.com/damienclaveau/kafka-graphite.git
-else
-    cd kafka-graphite
-    git pull origin master
-    cd ..
+# Get jmxtrans-agent
+JMXTRANS_AGENT_TAR_FILE=jmxtrans-agent-${JMXTRANS_AGENT_VERSION}.tar.gz
+JMXTRANS_AGENT_DIR=jmxtrans-agent-jmxtrans-agent-$JMXTRANS_AGENT_VERSION
+if [ ! -f "$JMXTRANS_AGENT_TAR_FILE" ] ; then
+    curl -LO https://github.com/jmxtrans/jmxtrans-agent/archive/$JMXTRANS_AGENT_TAR_FILE
+fi
+
+echo "Comparing jmxtrans-agent SHA512..."
+SHA512_SUM2=$(openssl dgst -sha512 $JMXTRANS_AGENT_TAR_FILE | awk '{print $2}')
+if [ "$SHA512_SUM2" != "$JMXTRANS_AGENT_SHA512_SUM" ] ; then
+    echo "Error: jmxtrans-agent SHA512 different from expected value. Stopping."
+    exit 1
 fi
 
 cd ../workspace
 
-echo "Building kafka-graphite..."
-cp -r ../sources/kafka-graphite kafka-graphite
-cd kafka-graphite
-mvn package
+echo "Building jmxtrans-agent..."
+cp ../sources/$JMXTRANS_AGENT_TAR_FILE .
+tar xzf $JMXTRANS_AGENT_TAR_FILE
+cd $JMXTRANS_AGENT_DIR
+./mvnw package
 if [ $? -ne 0 ] ; then
-    echo "Error: 'mvn package' returned non-zero value. Stopping."
+    echo "Error: 'mvnw package' returned non-zero value. Stopping."
     exit 1
 fi
 cd ..
@@ -51,8 +57,8 @@ mkdir -p files
 cp ../files/start-kafka-service.sh kafka/
 cp ../files/dm-kafka.service files/
 cp ../files/server.properties files/
-cp kafka-graphite/target/kafka-graphite-1.0.5.jar kafka/libs/
-cp kafka-graphite/LICENSE kafka/LICENSE.kafka-graphite
+cp ${JMXTRANS_AGENT_DIR}/target/jmxtrans-agent-${JMXTRANS_AGENT_VERSION}.jar kafka/libs/
+cp ${JMXTRANS_AGENT_DIR}/LICENSE kafka/LICENSE.jmxtrans-agent
 mkdir dm-kafka-$KAFKA_VERSION
 mv kafka files dm-kafka-$KAFKA_VERSION/
 tar czf dm-kafka-$KAFKA_VERSION.tar.gz dm-kafka-$KAFKA_VERSION

@@ -12,7 +12,7 @@ BuildArch: noarch
 %description
 Data Management Group Apache Kafka package.
 
-Includes kafka-graphite.
+Includes jmxtrans-agent.
 
 
 %prep
@@ -53,12 +53,15 @@ rm -rf %{buildroot}
 %config(noreplace) /etc/opt/dm_group/kafka/server.properties
 %config /opt/dm_group/kafka/config
 %doc /opt/dm_group/kafka/LICENSE
-%doc /opt/dm_group/kafka/LICENSE.kafka-graphite
+%doc /opt/dm_group/kafka/LICENSE.jmxtrans-agent
 %doc /opt/dm_group/kafka/NOTICE
 %doc /opt/dm_group/kafka/site-docs
 
 
 %changelog
+
+* Fri Jun 14 2019 Afonso Mukai <afonso.mukai@esss.se> - 2.2.0
+- Substitute kafka-graphite with jmxtrans-agent
 
 * Wed Aug 9 2017 Afonso Mukai <afonso.mukai@esss.se> - 0.10.2.0
 - Add kafka-graphite

@@ -6,4 +6,5 @@ else
     KAFKA_CONFIG=/opt/dm_group/kafka/config/server.properties
 fi
 
+export EXTRA_ARGS="-javaagent:/opt/dm_group/kafka/libs/jmxtrans-agent-1.2.8.jar=/opt/dm_group/kafka/config/jmxtrans-agent.xml"
 /opt/dm_group/kafka/bin/kafka-server-start.sh $KAFKA_CONFIG
