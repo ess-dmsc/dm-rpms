@@ -57,6 +57,7 @@ mkdir -p files
 cp ../files/start-kafka-service.sh kafka/
 cp ../files/dm-kafka.service files/
 cp ../files/server.properties files/
+cp ../files/jmxtrans-agent.xml files/
 cp ${JMXTRANS_AGENT_DIR}/target/jmxtrans-agent-${JMXTRANS_AGENT_VERSION}.jar kafka/libs/
 cp ${JMXTRANS_AGENT_DIR}/LICENSE kafka/LICENSE.jmxtrans-agent
 mkdir dm-kafka-$KAFKA_VERSION
