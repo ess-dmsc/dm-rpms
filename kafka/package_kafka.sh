@@ -60,6 +60,7 @@ cp ../files/server.properties files/
 cp ../files/jmxtrans-agent.xml files/
 cp ${JMXTRANS_AGENT_DIR}/target/jmxtrans-agent-${JMXTRANS_AGENT_VERSION}.jar kafka/libs/
 cp ${JMXTRANS_AGENT_DIR}/LICENSE kafka/LICENSE.jmxtrans-agent
+cp ${JMXTRANS_AGENT_DIR}/NOTICE kafka/NOTICE.jmxtrans-agent
 mkdir dm-kafka-$KAFKA_VERSION
 mv kafka files dm-kafka-$KAFKA_VERSION/
 tar czf dm-kafka-$KAFKA_VERSION.tar.gz dm-kafka-$KAFKA_VERSION

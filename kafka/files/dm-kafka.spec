@@ -57,6 +57,7 @@ rm -rf %{buildroot}
 %doc /opt/dm_group/kafka/LICENSE
 %doc /opt/dm_group/kafka/LICENSE.jmxtrans-agent
 %doc /opt/dm_group/kafka/NOTICE
+%doc /opt/dm_group/kafka/NOTICE.jmxtrans-agent
 %doc /opt/dm_group/kafka/site-docs
 
 
