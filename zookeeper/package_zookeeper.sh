@@ -8,7 +8,7 @@ cd sources
 
 if [ ! -f "zookeeper-$ZOOKEEPER_VERSION.tar.gz" ] ; then
     echo "File \"zookeeper-$ZOOKEEPER_VERSION.tar.gz\" not found. Downloading..."
-    curl -LO http://mirrors.rackhosting.com/apache/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz
+    curl -LO https://archive.apache.org/dist/zookeeper/zookeeper-3.4.10/zookeeper-3.4.10.tar.gz
 else
     echo "File \"zookeeper-$ZOOKEEPER_VERSION.tar.gz\" found. Skipping download."
 fi
