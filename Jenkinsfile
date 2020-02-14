@@ -16,7 +16,7 @@ node('rpm-packager') {
             numToKeepStr: ''
         ]
     ]]);
-    
+
     try {
         stage('Checkout') {
             checkout scm
@@ -24,10 +24,10 @@ node('rpm-packager') {
     } catch (e) {
         failure_function(e, 'Checkout failed')
     }
-    
+
     try {
         stage('Build') {
-            sh "make && make mostlyclean"
+            sh "make kafka && make mostlyclean"
             stash includes: 'rpms/**/*.rpm', name: 'rpms'
         }
     } catch (e) {
@@ -43,7 +43,7 @@ node('yum-repo') {
     } catch (e) {
         failure_function(e, 'Unstash failed')
     }
-    
+
     try {
         stage('Create Repo') {
             sh "createrepo rpms"
@@ -51,7 +51,7 @@ node('yum-repo') {
     } catch (e) {
         failure_function(e, 'Create repo failed')
     }
-    
+
     try {
         stage('Archive') {
             archiveArtifacts artifacts: 'rpms/', fingerprint: true, onlyIfSuccessful: true
