@@ -27,7 +27,7 @@ node('rpm-packager') {
 
     try {
         stage('Build') {
-            sh "make clean && make kafka"
+            sh "make clean && make zookeeper"
             stash includes: 'rpms/**/*.rpm', name: 'rpms'
         }
     } catch (e) {
