@@ -13,10 +13,10 @@ else
     echo "File \"apache-zookeeper-$ZOOKEEPER_VERSION-bin.tar.gz\" found. Skipping download."
 fi
 
-echo "Comparing MD5 sums..."
-MD5_SUM=$(openssl dgst -sha512 apache-zookeeper-$ZOOKEEPER_VERSION-bin.tar.gz | awk '{print $2}')
-if [ "$MD5_SUM" != "$ZOOKEEPER_SHA512_SUM" ] ; then
-    echo "Error: MD5 sum different from expected value. Stopping."
+echo "Comparing SHA512 sums..."
+SHA512_SUM=$(openssl dgst -sha512 apache-zookeeper-$ZOOKEEPER_VERSION-bin.tar.gz | awk '{print $2}')
+if [ "$SHA512_SUM" != "$ZOOKEEPER_SHA512_SUM" ] ; then
+    echo "Error: SHA512 sum different from expected value. Stopping."
     exit 1
 fi
 
