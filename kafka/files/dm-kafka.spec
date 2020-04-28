@@ -63,6 +63,9 @@ rm -rf %{buildroot}
 
 %changelog
 
+* Tue Apr 28 2020 Afonso Mukai <afonso.mukai@esss.se> - 2.5.0
+- Update for 2.5.0
+
 * Fri Jun 14 2019 Afonso Mukai <afonso.mukai@esss.se> - 2.2.0
 - Substitute kafka-graphite with jmxtrans-agent
 
