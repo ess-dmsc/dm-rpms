@@ -1,0 +1,16 @@
+[Unit]
+Description=Cluster Manager for Apache Kafka
+After=network.target
+
+[Service]
+User=cmak
+Group=cmak
+WorkingDirectory=/var/opt/dm_group/cmak
+Environment="JAVA_HOME=/usr/lib/jvm/java-11-openjdk"
+ExecStart=/opt/dm_group/cmak/start-cmak-service.sh
+Restart=on-failure
+ExecStopPost=/usr/bin/sleep 1
+ExecStopPost=/usr/bin/rm -f /var/opt/dm_group/cmak/cmak.pid
+
+[Install]
+WantedBy=multi-user.target
