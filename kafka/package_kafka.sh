@@ -21,32 +21,22 @@ if [ "$SHA512_SUM1" != "$KAFKA_SHA512_SUM" ] ; then
     exit 1
 fi
 
+cd ../workspace
+
 # Get jmxtrans-agent
-JMXTRANS_AGENT_TAR_FILE=jmxtrans-agent-${JMXTRANS_AGENT_VERSION}.tar.gz
-JMXTRANS_AGENT_DIR=jmxtrans-agent-jmxtrans-agent-$JMXTRANS_AGENT_VERSION
-if [ ! -f "$JMXTRANS_AGENT_TAR_FILE" ] ; then
-    curl -LO https://github.com/jmxtrans/jmxtrans-agent/archive/$JMXTRANS_AGENT_TAR_FILE
+JMXTRANS_AGENT_JAR_FILE=jmxtrans-agent-${JMXTRANS_AGENT_VERSION}.jar
+if [ ! -f "$JMXTRANS_AGENT_JAR_FILE" ] ; then
+    curl -LO https://github.com/jmxtrans/jmxtrans-agent/releases/download/jmxtrans-agent-${JMXTRANS_AGENT_VERSION}/${JMXTRANS_AGENT_JAR_FILE}
+    curl -L -o LICENSE.jmxtrans-agent https://raw.githubusercontent.com/jmxtrans/jmxtrans-agent/78066384f337b2bb0714ca506e6d93f95a0505b7/LICENSE
+    curl -L -o NOTICE.jmxtrans-agent https://raw.githubusercontent.com/jmxtrans/jmxtrans-agent/78066384f337b2bb0714ca506e6d93f95a0505b7/NOTICE
 fi
 
 echo "Comparing jmxtrans-agent SHA512..."
-SHA512_SUM2=$(openssl dgst -sha512 $JMXTRANS_AGENT_TAR_FILE | awk '{print $2}')
+SHA512_SUM2=$(openssl dgst -sha512 $JMXTRANS_AGENT_JAR_FILE | awk '{print $2}')
 if [ "$SHA512_SUM2" != "$JMXTRANS_AGENT_SHA512_SUM" ] ; then
     echo "Error: jmxtrans-agent SHA512 different from expected value. Stopping."
     exit 1
 fi
-
-cd ../workspace
-
-echo "Building jmxtrans-agent..."
-cp ../sources/$JMXTRANS_AGENT_TAR_FILE .
-tar xzf $JMXTRANS_AGENT_TAR_FILE
-cd $JMXTRANS_AGENT_DIR
-./mvnw package
-if [ $? -ne 0 ] ; then
-    echo "Error: 'mvnw package' returned non-zero value. Stopping."
-    exit 1
-fi
-cd ..
 
 echo "Extracting file..."
 tar xzf ../sources/kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz
@@ -58,9 +48,9 @@ cp ../files/start-kafka-service.sh kafka/
 cp ../files/dm-kafka.service files/
 cp ../files/server.properties files/
 cp ../files/jmxtrans-agent.xml files/
-cp ${JMXTRANS_AGENT_DIR}/target/jmxtrans-agent-${JMXTRANS_AGENT_VERSION}.jar kafka/libs/
-cp ${JMXTRANS_AGENT_DIR}/LICENSE kafka/LICENSE.jmxtrans-agent
-cp ${JMXTRANS_AGENT_DIR}/NOTICE kafka/NOTICE.jmxtrans-agent
+cp ${JMXTRANS_AGENT_JAR_FILE} kafka/libs/
+cp LICENSE.jmxtrans-agent kafka/
+cp NOTICE.jmxtrans-agent kafka/
 mkdir dm-kafka-$KAFKA_VERSION
 mv kafka files dm-kafka-$KAFKA_VERSION/
 tar czf dm-kafka-$KAFKA_VERSION.tar.gz dm-kafka-$KAFKA_VERSION
