@@ -44,7 +44,6 @@ rm -rf %{buildroot}
 %defattr(-,zookeeper,zookeeper)
 /opt/dm_group/zookeeper/bin
 /opt/dm_group/zookeeper/lib
-/opt/dm_group/zookeeper/zookeeper-*.jar
 /var/opt/dm_group/zookeeper
 /var/log/dm_group/zookeeper
 %attr(755,zookeeper,zookeeper) /opt/dm_group/zookeeper/start-zookeeper-service.sh
@@ -52,10 +51,13 @@ rm -rf %{buildroot}
 %config /opt/dm_group/zookeeper/conf
 %doc /opt/dm_group/zookeeper/*.md
 %doc /opt/dm_group/zookeeper/*.txt
-%doc /opt/dm_group/zookeeper/zookeeper-docs
+%doc /opt/dm_group/zookeeper/docs
 
 
 %changelog
+
+* Tue Apr 28 2020 Afonso Mukai <afonso.mukai@esss.se> - 3.5.7
+- Update to 3.5.7
 
 * Tue May 07 2019 Afonso Mukai <afonso.mukai@esss.se> - 3.4.14
 - Update docs directory name

@@ -1,8 +1,8 @@
 include */CONFIG
 
-.PHONY: all kafka zookeeper kafka-manager clean mostlyclean
+.PHONY: all kafka zookeeper cmak clean mostlyclean
 
-all: kafka zookeeper kafka-manager
+all: kafka zookeeper cmak
 
 kafka: rpms/noarch/dm-kafka-$(KAFKA_VERSION)-$(KAFKA_RELEASE).el7.noarch.rpm
 
@@ -18,11 +18,11 @@ rpms/noarch/dm-zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).el7.noarch.rp
 	mv zookeeper/package/RPMS/noarch/dm-zookeeper-$(ZOOKEEPER_VERSION)-$(ZOOKEEPER_RELEASE).el7.noarch.rpm rpms/noarch/
 
 
-kafka-manager: rpms/noarch/dm-kafka-manager-$(KAFKA_MANAGER_VERSION)-$(KAFKA_MANAGER_RELEASE).el7.noarch.rpm
+cmak: rpms/noarch/dm-cmak-$(CMAK_VERSION)-$(CMAK_RELEASE).el7.noarch.rpm
 
-rpms/noarch/dm-kafka-manager-$(KAFKA_MANAGER_VERSION)-$(KAFKA_MANAGER_RELEASE).el7.noarch.rpm: kafka-manager/CONFIG kafka-manager/package_kafka_manager.sh kafka-manager/files/* | rpms/noarch
-	cd kafka-manager; ./package_kafka_manager.sh
-	mv kafka-manager/package/RPMS/noarch/dm-kafka-manager-$(KAFKA_MANAGER_VERSION)-$(KAFKA_MANAGER_RELEASE).el7.noarch.rpm rpms/noarch/
+rpms/noarch/dm-cmak-$(CMAK_VERSION)-$(CMAK_RELEASE).el7.noarch.rpm: cmak/CONFIG cmak/package_cmak.sh cmak/files/* | rpms/noarch
+	cd cmak; ./package_cmak.sh
+	mv cmak/package/RPMS/noarch/dm-cmak-$(CMAK_VERSION)-$(CMAK_RELEASE).el7.noarch.rpm rpms/noarch/
 
 
 rpms/x86_64:
@@ -36,4 +36,4 @@ clean: mostlyclean
 	rm -rf rpms
 
 mostlyclean:
-	rm -rf {kafka,kafka-manager,zookeeper}/{package,sources,workspace}
+	rm -rf {kafka,cmak,zookeeper}/{package,sources,workspace}
