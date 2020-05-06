@@ -60,7 +60,7 @@ cd ..
 echo "Creating RPM..."
 cp workspace/dm-kafka-$KAFKA_VERSION.tar.gz package/SOURCES/
 cp files/dm-kafka.spec package/SPECS/
-rpmbuild \
+PATH=/usr/lib/jvm/java-11-openjdk/bin:$PATH JAVA_HOME=/usr/lib/jvm/java-11-openjdk rpmbuild \
     --define "_topdir $(pwd)/package" \
     --define "_version $KAFKA_VERSION" \
     --define "_release $KAFKA_RELEASE" \
