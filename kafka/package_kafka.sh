@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Prepare environment
-SCALA_VERSION=2.12
+SCALA_VERSION=2.13
 rm -rf package/* workspace/*
 mkdir -p sources package/{BUILD,RPMS,SOURCES,SPECS,SRPMS} workspace
 
@@ -27,8 +27,8 @@ cd ../workspace
 JMXTRANS_AGENT_JAR_FILE=jmxtrans-agent-${JMXTRANS_AGENT_VERSION}.jar
 if [ ! -f "$JMXTRANS_AGENT_JAR_FILE" ] ; then
     curl -LO https://github.com/jmxtrans/jmxtrans-agent/releases/download/jmxtrans-agent-${JMXTRANS_AGENT_VERSION}/${JMXTRANS_AGENT_JAR_FILE}
-    curl -L -o LICENSE.jmxtrans-agent https://raw.githubusercontent.com/jmxtrans/jmxtrans-agent/78066384f337b2bb0714ca506e6d93f95a0505b7/LICENSE
-    curl -L -o NOTICE.jmxtrans-agent https://raw.githubusercontent.com/jmxtrans/jmxtrans-agent/78066384f337b2bb0714ca506e6d93f95a0505b7/NOTICE
+    curl -L -o LICENSE.jmxtrans-agent https://raw.githubusercontent.com/jmxtrans/jmxtrans-agent/$JMXTRANS_AGENT_COMMIT/LICENSE
+    curl -L -o NOTICE.jmxtrans-agent https://raw.githubusercontent.com/jmxtrans/jmxtrans-agent/$JMXTRANS_AGENT_COMMIT/NOTICE
 fi
 
 echo "Comparing jmxtrans-agent SHA512..."
