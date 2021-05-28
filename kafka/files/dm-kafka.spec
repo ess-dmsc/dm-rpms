@@ -58,10 +58,14 @@ rm -rf %{buildroot}
 %doc /opt/dm_group/kafka/LICENSE.jmxtrans-agent
 %doc /opt/dm_group/kafka/NOTICE
 %doc /opt/dm_group/kafka/NOTICE.jmxtrans-agent
+%doc /opt/dm_group/kafka/licenses
 %doc /opt/dm_group/kafka/site-docs
 
 
 %changelog
+
+* Fri May 28 2021 Afonso Mukai <afonso.mukai@esss.se> - 2.8.0
+- Update for 2.8.0
 
 * Tue Apr 28 2020 Afonso Mukai <afonso.mukai@esss.se> - 2.5.0
 - Update for 2.5.0
